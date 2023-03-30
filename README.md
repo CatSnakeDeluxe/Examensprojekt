@@ -22,6 +22,7 @@ Jag tänkte skapa ett socialt nätverk likt instagram med nodejs/express som bac
 * Registrera användare
 * Inloggning/Session
 * Inloggad användare ska kunna se sina egna poster på en profilsida
+* Inloggad användare ska kunna fo notiser om någon gillar/kommenterar på en post
 * Inloggad användare ska kunna lägga till/editera/ta bort poster
 * Inloggad användare ska kunna gilla andras poster
 * Inloggad användare ska kunna kommentera på poster
