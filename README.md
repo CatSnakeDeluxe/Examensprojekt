@@ -34,5 +34,6 @@ Jag tänkte skapa ett socialt nätverk likt instagram med nodejs/express som bac
 * Editera kontouppgifter/radera konto samt alla poster användaren skapat
 * Hashtags för att användare ska kunna söka efter poster
 * Funktionalitet för att följa användare och se deras poster i flödet
+* Funktionalitet för att använda filter på sina bilder
 * Chatt funktionalitet
 
