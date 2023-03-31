@@ -21,6 +21,7 @@ Jag tänkte skapa ett socialt nätverk likt instagram med nodejs/express som bac
 ### Kod
 * Registrera användare
 * Inloggning/Session
+* Hashning av lösenord
 * Inloggad användare ska kunna se sina egna poster på en profilsida
 * Inloggad användare ska kunna fo notiser om någon gillar/kommenterar på en post
 * Inloggad användare ska kunna lägga till/editera/ta bort poster
@@ -35,5 +36,6 @@ Jag tänkte skapa ett socialt nätverk likt instagram med nodejs/express som bac
 * Hashtags för att användare ska kunna söka efter poster
 * Funktionalitet för att följa användare och se deras poster i flödet
 * Funktionalitet för att använda filter på sina bilder
+* Funktionalitet för att återställa glömt lösenord
 * Chatt funktionalitet
 
