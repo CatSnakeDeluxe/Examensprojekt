@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav />
+      {/* <Nav /> */}
       <Routes>
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />}/>
