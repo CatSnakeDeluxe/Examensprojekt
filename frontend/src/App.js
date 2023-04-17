@@ -1,11 +1,15 @@
-import React from "react";
-import logo from "./logo.svg";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Nav from './components/Nav/Nav';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 import "./App.css";
 
 function App() {
-  const [data, setData] = React.useState(null);
+  const [data, setData] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
       .then((data) => setData(data.message));
@@ -13,10 +17,11 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
+      <Nav />
+      <Routes>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
+      </Routes>
     </div>
   );
 }
