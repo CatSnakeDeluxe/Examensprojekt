@@ -8,11 +8,17 @@
     -moz-text-fill-color: transparent;
 }
 
+.loginContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 h1 {
     font-family: 'Grand Hotel', cursive;
     font-size: 4rem;
     margin: auto;
-    padding: 2rem;
 }
 
 h2 {
@@ -59,7 +65,7 @@ h2 {
 
 .loginRegisterLink {
     font-weight: 200;
-    margin: auto;
+    text-align: center;
     margin-top: 4rem;
 }
 
