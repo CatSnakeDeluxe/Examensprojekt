@@ -3,31 +3,39 @@ import './Register.css';
 import { useState } from "react";
 
 const Register = () => {
-    const [formValue, setFormValue] = useState({ email:'', username:'', password:''});
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const handleInput = (e) => {
-        const {name, value} = e.target;
-        setFormValue({...formValue, [name]:value});
-    }
-
-    const handleRegister = async(e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const inputValues = { email: formValue.email, username: formValue.username, password: formValue.password}
+        const data = { email, username, password };
 
-        let res = await fetch('http://localhost:3001/api/register', {
-            method: 'POST',
-            headers: {'content-type' : 'application/json'},
-            body: JSON.stringify(inputValues)
+        fetch('http://localhost:3001/api/register', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+        console.log('Success:', data);
+        })
+        .catch((error) => {
+        console.error('Error:', error);
         });
     }
+
     return (
         <div className="registerContainer">
             <h1 className="gradientText">Postr</h1>
-            <form className="registerForm" onSubmit={handleRegister}>
+            <form className="registerForm" onSubmit={handleSubmit}>
                 <h2>Register</h2>
-                <input type="email" name="email" id="email" placeholder="Email" value={formValue.email} onChange={handleInput}/>
-                <input type="text" name="username" id="username" placeholder="Username" value={formValue.username} onChange={handleInput}/>
-                <input type="password" name="password" id="password" placeholder="Password" value={formValue.password} onChange={handleInput}/>
+                <input type="email" name="email" id="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
+                <input type="text" name="username" id="username" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)}/>
+                <input type="password" name="password" id="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
                 <label className="custom-file-upload">
                     <input type="file"/>
                     Upload Profile Picture
@@ -40,3 +48,50 @@ const Register = () => {
 }
 
 export default Register;
+
+// import React, { useState } from 'react';
+
+// function DemoForm() {
+// const [name, setName] = useState('');
+// const [email, setEmail] = useState('');
+// const [message, setMessage] = useState('');
+
+// const handleSubmit = (e) => {
+// e.preventDefault();
+// const data = { name, email, message };
+// fetch('http://localhost:3001/demo', {
+// method: 'POST',
+// headers: {
+// 'Content-Type': 'application/json'
+// },
+// body: JSON.stringify(data)
+// })
+// .then(response => response.json())
+// .then(data => {
+// console.log('Success:', data);
+// })
+// .catch((error) => {
+// console.error('Error:', error);
+// });
+// }
+
+// return (
+// <form onSubmit={handleSubmit}>
+// <label>
+// Name:
+// <input type="text" value={name} onChange={e => setName(e.target.value)} />
+// </label>
+// <label>
+// Email:
+// <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+// </label>
+// <label>
+// Message:
+// <textarea value={message} onChange={e => setMessage(e.target.value)} />
+// </label>
+// <button type="submit">Submit</button>
+// </form>
+// );
+// }
+
+// export default DemoForm;
