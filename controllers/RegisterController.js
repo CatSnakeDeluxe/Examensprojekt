@@ -22,11 +22,11 @@ async function registerUser(req, res) {
         newUserDocument.save();
 
         query = new URLSearchParams({type: "success", message: "Successfully Created User"});
-        res.redirect(`/login?${query}`);
+        res.redirect(`http://localhost:3000/login?${query}`);
     } catch (error) {
         console.error(error.message);
         query = new URLSearchParams({type: "fail", message: error.message});
-        return res.redirect(`/register?${query}`);
+        return res.redirect(`http://localhost:3000/register?${query}`);
     }
 }
 
