@@ -7,16 +7,17 @@ import Register from './components/Register/Register';
 import "./App.css";
 
 function App() {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
-  useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+  // useEffect(() => {
+  //   fetch('/api')
+  //     .then((res) => res.json())
+  //     .then((data) => setData(data.message));
+  // }, []);
 
   return (
     <div className="App">
+      {/* <p>{ data }</p> */}
       {/* <Nav /> */}
       <Routes>
         <Route path="/login" element={<Login />}/>

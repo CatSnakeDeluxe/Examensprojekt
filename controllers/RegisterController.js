@@ -1,6 +1,7 @@
 import UserModel from "../models/UserModel.js";
 
 async function registerUser(req, res) {
+    console.log("REQUEST", req);
     let query = null;
     try {
         const { email, username, password } = req.body;
