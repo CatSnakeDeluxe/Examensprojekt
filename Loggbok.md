@@ -12,3 +12,5 @@ Kommunikation mellan react och node verkar fungera. Jag har skapat två komponen
 Jag har skapat en databas på mongodb som heter postr med ett table(user). Jag har skapat en .env fil i mitt projekt och gjort en koppling till databasen i UserModel.js.
 ## Datum: 23-04-19
 Jag har kämpat med att posta formulärdata från react(register.jsx) till node, efter mycket error och access denied har jag installerat cors (middleware) som jag använder både i server.js och i register.jsx. Nu går det att lägga till användare men jag får problem med min redirect till login.jsx.
+## Datum: 23-04-20
+Redirect har inte fungerat efter att jag har registrerat användare så jag har börjat bygga om min backend från grunden för att min backend ska bli mer logisk. Redirect ska jag istället bara köra i react då det inte ska bli problem som nu när jag har redirectat i min backend. I min nya backend använder jag mig av statuskoder som jag inte gjort innan.

@@ -11,7 +11,7 @@ const Register = () => {
         e.preventDefault();
         const data = { email, username, password };
 
-        fetch('http://localhost:3001/api/register', {
+        fetch('http://localhost:3001/register', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json'
