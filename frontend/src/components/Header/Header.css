@@ -1,0 +1,24 @@
+.logoText {
+    font-family: 'Grand Hotel', cursive;
+    font-size: 2rem;
+    margin: auto;
+    padding: 0.5rem;
+}
+
+.headerNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.fa-paper-plane {
+    margin-left: 1.4rem;
+    margin-right: 0.4rem;
+    color: var(--white);
+    font-size: 1.2rem;
+}
+.fa-bell {
+    color: var(--white);
+    font-size: 1.2rem;
+}

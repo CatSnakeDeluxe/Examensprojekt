@@ -1,31 +1,40 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Register.css';
 import { useState } from "react";
 
 const Register = () => {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
+
         const data = { email, username, password };
 
-        fetch('http://localhost:3001/register', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        body: JSON.stringify(data)
-        })
-        .then(response => response.json())
-        .then(data => {
-        console.log('Success:', data);
-        })
-        .catch((error) => {
-        console.error('Error:', error);
+        const response = await fetch('/api/user', {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
+
+        const json = await response.json();
+
+        if (!response.ok) {
+            setError(json.error);
+        }
+
+        if (response.ok) {
+            setError(null);
+            console.log('New User Added', json);
+            navigate("/login");
+        }
     }
 
     return (
@@ -41,7 +50,9 @@ const Register = () => {
                     Upload Profile Picture
                 </label>
                 <input className="gradientText" type="submit" value="Register" />  
+                {error && <div className="error">{error}</div>}
             </form>
+            
             <p className="loginRegisterLink">Already a user?<Link className="link gradientText" to="/login">Login</Link></p>
         </div>
     )

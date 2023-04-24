@@ -1,4 +1,4 @@
-.gradientText {
+/* .gradientText {
     background-color: var(--yellow);
     background-image: linear-gradient(45deg, var(--yellow), var(--orange));
     width: fit-content;
@@ -6,7 +6,7 @@
     -webkit-text-fill-color: transparent; 
     -moz-background-clip: text;
     -moz-text-fill-color: transparent;
-}
+} */
 
 .registerContainer {
     height: 100vh;

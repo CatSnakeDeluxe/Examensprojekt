@@ -11,6 +11,10 @@ Kommunikation mellan react och node verkar fungera. Jag har skapat två komponen
 ## Datum: 23-04-18
 Jag har skapat en databas på mongodb som heter postr med ett table(user). Jag har skapat en .env fil i mitt projekt och gjort en koppling till databasen i UserModel.js.
 ## Datum: 23-04-19
-Jag har kämpat med att posta formulärdata från react(register.jsx) till node, efter mycket error och access denied har jag installerat cors (middleware) som jag använder både i server.js och i register.jsx. Nu går det att lägga till användare men jag får problem med min redirect till login.jsx.
+Jag har kämpat med att posta formulärdata från react (register.jsx) till node, efter mycket error och access denied har jag installerat cors (middleware) som jag använder både i server.js och i register.jsx. Nu går det att lägga till användare men jag får problem med min redirect till login.jsx.
 ## Datum: 23-04-20
 Redirect har inte fungerat efter att jag har registrerat användare så jag har börjat bygga om min backend från grunden för att min backend ska bli mer logisk. Redirect ska jag istället bara köra i react då det inte ska bli problem som nu när jag har redirectat i min backend. I min nya backend använder jag mig av statuskoder som jag inte gjort innan.
+## Datum: 23-04-21
+Jag har följt en tutorial på youtube (netninja mern stack tutorial) som har gett mig mycket mer förståelse för hur allt kommunicerar. Jag har skapat en global context för posts och provat att göra requests via postman som har fungerat. för tillfället fungerar det inte att att skapa användare och min redirect fungerar fortfarande inte (från register till login).
+## Datum: 23-04-24
+Jag har fått ordning på både registrering och redirect. Jag använder mig av useNavigate för att göra en redirect till login. Jag löste registreringen då jag upptäckte att det saknades email i routes/users.js så jag fick felmeddelandet att email är required. Hashning av lösenord har jag också fått till. Jag har börjat koda frontenden för min navigation och header som man har tillgång till som inloggad (det finns ingen autentisering för tillfället).
