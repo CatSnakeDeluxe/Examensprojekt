@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import Post from '../Post/Post';
-import PostForm from '../PostForm/PostForm';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
@@ -33,7 +32,6 @@ const Feed = () => {
                     <Post key={post._id} post={post} />
                 ))}
             </div>
-            <PostForm />
             <Nav />
         </div>
     )

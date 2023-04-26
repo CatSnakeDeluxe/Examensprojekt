@@ -21,3 +21,4 @@ Jag har fått ordning på både registrering och redirect. Jag använder mig av 
 ## Datum: 23-04-25
 Jag har börjat kolla på jwt (jsonwebtoken) och hur det fungerar i en mern stack app. Har försökt prova det i mitt projekt men oavsett vart jag lägger min JWT_SECRET så får jag att den är undefined. Har försökt ha den i min .env fil och hårdkodad i dom filer där den behövs men det fungerar inte.
 ## Datum: 23-04-26
+Jag har fått jwt att fungera och det går bara att nå api/protected om man har fått en token när man loggar in. Jag försöker få med user id när man skapar en post men det fungerar inte just nu, jag får "jwt must be provided". Jag har lagt till en function ensureAuth i min post route för att man inte ska kunna komma åt det som icke inloggad, tyvärr fungerar det inte då redirect från backend bara blir 404 i min frontend. Jag har också försökt få till profilbildsuppladdning som även det bara krånglar.

@@ -7,13 +7,13 @@ const router = express.Router();
 //     res.json({mssg: 'GET all Users'});
 // });
 
-// router.get('/:id', (req, res) => {
-//     res.json({mssg: 'GET a single User'});
-// });
+router.get('/:id', userController.getSingleuser);
 
-router.post('/', userController.createUser);
+// register
+// router.post('/', userController.createUser);
 
-router.post('/login', userController.login);
+// login
+// router.post('/login', userController.login);
 
 // router.delete('/:id', (req, res) => {
 //     res.json({mssg: 'DELETE a user'});

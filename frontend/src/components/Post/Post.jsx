@@ -4,7 +4,7 @@ const Post = ({ post }) => {
     const { dispatch } = usePostsContext();
 
     const handleDelete = async() => {
-        const response = await fetch('/api/post/' + post._id, {
+        const response = await fetch('/api/protected/post/' + post._id, {
             method: 'DELETE'
         });
         const json = await response.json();

@@ -24,6 +24,10 @@ const userSchema = new Schema({
         minLength: 4,
         maxLength: 36
     },
+    profilePicture: {
+        type: String,
+        default: null
+    }
 }, { timestamps: true });
 
 userSchema.pre("save", function (next) {

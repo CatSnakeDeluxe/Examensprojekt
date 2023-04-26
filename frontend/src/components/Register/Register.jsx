@@ -15,7 +15,7 @@ const Register = () => {
 
         const data = { email, username, password };
 
-        const response = await fetch('/api/user', {
+        const response = await fetch('/api/register', {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(data),
@@ -46,7 +46,7 @@ const Register = () => {
                 <input type="text" name="username" id="username" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)}/>
                 <input type="password" name="password" id="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
                 <label className="custom-file-upload">
-                    <input type="file"/>
+                    <input type="file" name="file"/>
                     Upload Profile Picture
                 </label>
                 <input className="gradientText" type="submit" value="Register" />  

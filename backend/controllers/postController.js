@@ -1,5 +1,9 @@
 import postModel from '../models/postModel.js';
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+
+dotenv.config();
 
 // get all posts
 const getAllPosts = async (req, res) => {
@@ -29,19 +33,12 @@ const getSinglePost = async(req, res) => {
 // create a new post
 const createPost = async (req, res) => {
     const { title } = req.body;
-
-    let emptyFields = [];
-
-    if (!title) {
-        emptyFields.push('title');
-    }
-    if (emptyFields.length > 0) {
-        return res.status(400).json({ error: 'Please fill in all fields', emptyFields});
-    }
-
+    const token = req.headers.authorization;
     // add post to db
     try {
-        const newPost = await postModel.create({title});
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = decodedToken.userId;
+        const newPost = await postModel.create({ title, user: userId });
         res.status(200).json(newPost);
     } catch (err) {
         res.status(400).json({error: err.message});

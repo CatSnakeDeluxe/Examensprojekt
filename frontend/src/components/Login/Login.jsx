@@ -15,7 +15,7 @@ const Login = () => {
 
         const data = { username, password };
 
-        const response = await fetch('/api/user/login', {
+        const response = await fetch('/api/login', {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(data),
@@ -25,6 +25,9 @@ const Login = () => {
         });
 
         const json = await response.json();
+        // const data = await response.json();
+        localStorage.setItem('token', json.token); // Store the token in local storage
+        // setToken(json.token);
 
         if (!response.ok) {
             setError(json.error);
