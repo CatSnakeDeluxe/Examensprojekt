@@ -1,5 +1,9 @@
 import userModel from '../models/userModel.js';
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+
+dotenv.config();
 
 // get all posts
 // const getAllPosts = async (req, res) => {
@@ -25,13 +29,35 @@ import mongoose from 'mongoose';
 
 //     res.status(200).json(singlePost);
 // }
-
+const JWT_SECRET="123goK!pusp6ThEdURUtRenOwUhAsWUCLheBazl!uJLPlS8EbreWLdrupIwabRAsiBu";
 // create a new user
 const createUser = async (req, res) => {
     const { email, username, password } = req.body;
 
     try {
         const newUser = await userModel.create({ email, username, password });
+        
+        if (!process.env.JWT_SECRET) {
+            throw new Error('JWT secret is not defined');
+        }
+
+        const payload = {
+            user: {
+              id: newUser.id,
+            },
+          };
+    
+          jwt.sign(
+            payload,
+            // process.env.JWT_SECRET,
+            JWT_SECRET,
+            { expiresIn: '7 days' },
+            (err, token) => {
+              if (err) throw err;
+              res.json({ token });
+            }
+          );
+
         res.status(200).json(newUser);
     } catch (err) {
         res.status(400).json({error: err.message});
@@ -39,6 +65,7 @@ const createUser = async (req, res) => {
 }
 
 const login = async (req, res) => {
+
     const { username, password } = req.body;
 
     try {
@@ -53,6 +80,27 @@ const login = async (req, res) => {
         if (!checkUserAuth) {
             throw new Error("Wrong Password");
         }
+
+        if (!process.env.JWT_SECRET) {
+            throw new Error('JWT secret is not defined');
+        }
+        // return jwt
+        const payload = {
+            user: {
+            id: user.id,
+            },
+        };
+
+        jwt.sign(
+            payload,
+            // process.env.JWT_SECRET,
+            JWT_SECRET,
+            { expiresIn: '30 days' },
+            (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+            }
+        );
 
         res.status(200).json(user);
     } catch (err) {

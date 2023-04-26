@@ -30,6 +30,15 @@ const getSinglePost = async(req, res) => {
 const createPost = async (req, res) => {
     const { title } = req.body;
 
+    let emptyFields = [];
+
+    if (!title) {
+        emptyFields.push('title');
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all fields', emptyFields});
+    }
+
     // add post to db
     try {
         const newPost = await postModel.create({title});

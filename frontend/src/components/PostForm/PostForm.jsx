@@ -5,6 +5,7 @@ const PostForm = () => {
     const { dispatch } = usePostsContext;
     const [title, setTitle] = useState('');
     const [error, setError] = useState(null);
+    const [emptyFields, setEmptyFields] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,11 +24,13 @@ const PostForm = () => {
 
         if (!response.ok) {
             setError(json.error);
+            setEmptyFields(json.emptyFields);
         }
 
         if (response.ok) {
             setTitle('');
             setError(null);
+            setEmptyFields([]);
             console.log('New Post Added', json);
             dispatch({type: 'CREATE_POST', payload: json});
         }
@@ -36,7 +39,7 @@ const PostForm = () => {
     return (
         <form className="createPostForm" onSubmit={handleSubmit}>
             <h3>Add Post</h3>
-            <input type="text" onChange={(e) => setTitle(e.target.value)}/>
+            <input type="text" onChange={(e) => setTitle(e.target.value)} className={emptyFields.includes('title') ? 'error' : ''}/>
             <button>Create Post</button>
             {error && <div className="error">{error}</div>}
         </form>

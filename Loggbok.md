@@ -18,3 +18,6 @@ Redirect har inte fungerat efter att jag har registrerat användare så jag har 
 Jag har följt en tutorial på youtube (netninja mern stack tutorial) som har gett mig mycket mer förståelse för hur allt kommunicerar. Jag har skapat en global context för posts och provat att göra requests via postman som har fungerat. för tillfället fungerar det inte att att skapa användare och min redirect fungerar fortfarande inte (från register till login).
 ## Datum: 23-04-24
 Jag har fått ordning på både registrering och redirect. Jag använder mig av useNavigate för att göra en redirect till login. Jag löste registreringen då jag upptäckte att det saknades email i routes/users.js så jag fick felmeddelandet att email är required. Hashning av lösenord har jag också fått till. Jag har börjat koda frontenden för min navigation och header som man har tillgång till som inloggad (det finns ingen autentisering för tillfället).
+## Datum: 23-04-25
+Jag har börjat kolla på jwt (jsonwebtoken) och hur det fungerar i en mern stack app. Har försökt prova det i mitt projekt men oavsett vart jag lägger min JWT_SECRET så får jag att den är undefined. Har försökt ha den i min .env fil och hårdkodad i dom filer där den behövs men det fungerar inte.
+## Datum: 23-04-26
