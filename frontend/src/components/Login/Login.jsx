@@ -15,7 +15,7 @@ const Login = () => {
 
         const data = { username, password };
 
-        const response = await fetch('/api/login', {
+        const response = await fetch('/api/user/login', {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(data),

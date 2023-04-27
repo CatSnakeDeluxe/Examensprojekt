@@ -15,7 +15,7 @@ const Register = () => {
 
         const data = { email, username, password };
 
-        const response = await fetch('/api/register', {
+        const response = await fetch('/api/user/signup', {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(data),

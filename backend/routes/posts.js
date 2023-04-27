@@ -5,10 +5,10 @@ function ensureAuth(req,res,next) {
     const token = req.headers.authorization;
     if (!token) {
         // Token not found
-        // return res.status(401).json({
-        //     message: 'Unauthorized'
-        // });
-        return res.redirect('/login');
+        return res.status(401).json({
+            message: 'Unauthorized'
+        });
+        // return res.redirect('http://localhost:3000/login');
     }
 
     try {
@@ -29,15 +29,15 @@ function ensureAuth(req,res,next) {
         next();
     } catch (error) {
         // Token is invalid
-        // res.status(401).json({
-        //     message: 'Unauthorized Token is invalid'
-        // });
-        res.redirect('/login');
+        res.status(401).json({
+            message: 'Unauthorized Token is invalid'
+        });
+        // res.redirect('http://localhost:3000/login');
     }
 }
 
 const router = express.Router();
-router.use(ensureAuth);
+// router.use(ensureAuth);
 
 // get all posts
 router.get('/', postController.getAllPosts);

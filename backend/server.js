@@ -2,8 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import PostRoutes from './routes/posts.js';
 import UserRoutes from './routes/users.js';
-import LoginRoutes from './routes/login.js';
-import RegisterRoutes from './routes/register.js';
+// import LoginRoutes from './routes/login.js';
+// import RegisterRoutes from './routes/register.js';
 import mongoose from 'mongoose';
 import jwt from "jsonwebtoken";
 import cors from 'cors';
@@ -54,8 +54,8 @@ app.get('/api/protected', (req, res) => {
 // routes
 app.use('/api/post', PostRoutes);
 app.use('/api/user', UserRoutes);
-app.use('/api/login', LoginRoutes);
-app.use('/api/register', RegisterRoutes);
+// app.use('/api/login', LoginRoutes);
+// app.use('/api/register', RegisterRoutes);
 
 // connect to db
 try {
