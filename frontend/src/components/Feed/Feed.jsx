@@ -14,10 +14,10 @@ const Feed = () => {
         const fetchPosts = async () => {
             const response = await fetch('/api/post', {
                 headers: {
-                    headers: {'Authorization': `Bearer ${user.token}`},
+                    'Authorization': `Bearer ${user.token}`
                 }
             });
-            
+
             const json = await response.json();
 
             if(response.ok) {
