@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import './Register.css';
+import { useSignup } from "../../hooks/useSignup";
+import './Signup.css';
 import { useState } from "react";
 
-const Register = () => {
+const Signup = () => {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -10,31 +11,36 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
 
+    const { signup } = useSignup();
+
     const handleSubmit = async(e) => {
         e.preventDefault();
 
-        const data = { email, username, password };
+        await signup(email, username, password);
 
-        const response = await fetch('/api/user/signup', {
-            method: 'POST',
-            mode: 'cors',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+        // const data = { email, username, password };
 
-        const json = await response.json();
+        // const response = await fetch('/api/user/signup', {
+        //     method: 'POST',
+        //     mode: 'cors',
+        //     body: JSON.stringify(data),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // });
 
-        if (!response.ok) {
-            setError(json.error);
-        }
+        // const json = await response.json();
 
-        if (response.ok) {
-            setError(null);
-            console.log('New User Added', json);
-            navigate("/login");
-        }
+        // if (!response.ok) {
+        //     setError(json.error);
+        // }
+
+        // if (response.ok) {
+        //     setError(null);
+        //     console.log('New User Added', json);
+        //     navigate("/login");
+        // }
+        navigate("/login");
     }
 
     return (
@@ -58,4 +64,4 @@ const Register = () => {
     )
 }
 
-export default Register;
+export default Signup;

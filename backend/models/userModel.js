@@ -40,7 +40,7 @@ userSchema.statics.signup = async function(email, username, password) {
     //   throw Error('Password not strong enough')
     // }
   
-    const exists = await this.findOne({ email })
+    const exists = await this.findOne({ email });
   
     if (exists) {
       throw Error('Email already in use')
@@ -48,7 +48,6 @@ userSchema.statics.signup = async function(email, username, password) {
   
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
-  
     const user = await this.create({ email, username, password: hash })
   
     return user

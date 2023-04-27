@@ -1,24 +1,30 @@
 import { useState } from "react";
 import { usePostsContext } from "../../hooks/usePostsContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
 
 const PostForm = () => {
-    const { dispatch } = usePostsContext;
+    const { dispatch } = usePostsContext();
+    const { user } = useAuthContext();
     const [title, setTitle] = useState('');
     const [error, setError] = useState(null);
-    // const [emptyFields, setEmptyFields] = useState([]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        if (!user) {
+            return;
+        }
+
         const post = {title};
 
-        const response = await fetch('/api/protected/post', {
+        const response = await fetch('/api/post', {
             method: 'POST',
             body: JSON.stringify(post),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         });
 
@@ -26,13 +32,11 @@ const PostForm = () => {
 
         if (!response.ok) {
             setError(json.error);
-            // setEmptyFields(json.emptyFields);
         }
 
         if (response.ok) {
             setTitle('');
             setError(null);
-            // setEmptyFields([]);
             console.log('New Post Added', json);
             dispatch({type: 'CREATE_POST', payload: json});
         }
