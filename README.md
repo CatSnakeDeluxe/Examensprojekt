@@ -1,17 +1,19 @@
 # Examensprojekt
 ## Starta upp projektet
-### steg 1
+### Steg 1
 Klona ner repot
-### steg 2
+### Steg 2
 Konfigurera en .env fil på rotnivå i backend mappen.
 Det finns en .env-example med instruktioner
-### steg 3
+### Steg 3
 Öppna en terminal (för backend)
 kör: cd backend (för att ta dig till rätt mapp för att sedan köra kommandot i terminalen)
+kör: npm i (för att installera alla dependencies som krävs)
 kör: npm run dev
-### steg 4
+### Steg 4
 Öppna en terminal (för frontend)
 kör: cd frontend (för att ta dig till rätt mapp för att sedan köra kommandot i terminalen)
+kör: npm i (för att installera alla dependencies som krävs)
 kör: npm start
 ## Översiktlig beskrivning
 Jag tänkte skapa ett socialt nätverk likt instagram med nodejs/express som backend och react som frontend. Tanken är att man ska kunna registrera användare, logga in, skapa inlägg med bilder och bildtext.

@@ -7,34 +7,34 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     email: {
         type: String,
-        required: "email must be filled in",
+        required: "Email must be filled in",
         unique: true,
         match: [/\S+@\S+\.\S+/, 'is invalid']
     },
     username: {
         type: String,
-        required: "username must be filled in",
+        required: "Username must be filled in",
         unique: true,
         match: [/^[a-zA-Z0-9]+$/, "is invalid"]
     },
     password: {
         type: String,
-        required: "password must be filled in",
+        required: "Password must be filled in",
     },
-    profilePicture: {
+    filename: {
         type: String,
-        default: null
+        required: "Profile image must be uploaded",
     }
 }, { timestamps: true });
 
-userSchema.statics.signup = async function(email, username, password) {
+userSchema.statics.signup = async function(email, username, password, filename) {
 
     // validation
-    if (!email || !username || !password) {
-      throw Error('All fields must be filled')
+    if (!email || !username || !password || !filename) {
+      throw Error('All fields must be filled');
     }
     if (!validator.isEmail(email)) {
-      throw Error('Email not valid')
+      throw Error('Email not valid');
     }
     // if (!validator.isStrongPassword(password)) {
     //   throw Error('Password not strong enough')
@@ -43,14 +43,14 @@ userSchema.statics.signup = async function(email, username, password) {
     const exists = await this.findOne({ email });
   
     if (exists) {
-      throw Error('Email already in use')
+      throw Error('Email already in use');
     }
   
-    const salt = await bcrypt.genSalt(10)
-    const hash = await bcrypt.hash(password, salt)
-    const user = await this.create({ email, username, password: hash })
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    const user = await this.create({ email, username, password: hash, filename });
   
-    return user
+    return user;
   }
   
   // static login method

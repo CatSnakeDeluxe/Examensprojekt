@@ -1,5 +1,6 @@
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import './Post.css';
 
 const Post = ({ post }) => {
     const { dispatch } = usePostsContext();
@@ -23,11 +24,42 @@ const Post = ({ post }) => {
         }
     }
 
+    const imageUrl = `http://localhost:3001/static/${post.filename}`;
+    // const imageUrl = `../../../../backend/public/uploads/posts/${post.filename}`;
+
     return (
         <div className="post">
-            <h4>{post.title}</h4>
-            <p>{post.createdAt}</p>
-            <span onClick={handleDelete}>Delete</span>
+            <div className="postHeader">
+                <div>
+                    <div className="userContainer">
+                        <div className="userImgContainer">
+                            <img src={imageUrl} alt="userImage" />
+                        </div>
+                        <h4>Username</h4>
+                    </div>
+                </div>
+                <div>
+                    <p>{post.createdAt}</p>
+                </div>
+            </div>
+            <div className="postImgContainer">
+                <img src={imageUrl} alt="postImage" />
+            </div>
+            <div className="iconsContainer">
+                <div className="likesContainer">
+                    <i className="fa-regular fa-heart"></i>
+                    <p className="likes">3</p>
+                </div>
+                <div>
+                    <i className="fa-regular fa-bookmark"></i>
+                    <i className="fa-regular fa-message"></i>
+                </div>
+            </div>
+            <div className="descriptionContainer">
+                <p>{post.description}</p>
+                <p className="hashtags">{post.hashtags}</p>
+            </div>
+            {/* <span onClick={handleDelete}>Delete</span> */}
         </div>
     )
 }

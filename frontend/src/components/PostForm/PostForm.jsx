@@ -1,14 +1,24 @@
 import { useState } from "react";
 import { usePostsContext } from "../../hooks/usePostsContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
 
 const PostForm = () => {
+    const navigate = useNavigate();
+    
     const { dispatch } = usePostsContext();
     const { user } = useAuthContext();
-    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [hashtags, setHashtags] = useState('');
+    const [file, setFile] = useState('');
     const [error, setError] = useState(null);
+
+    const formData = new FormData();
+    if (description) formData.append('description', description);
+    if (hashtags) formData.append('hashtags', hashtags);
+    if (file) formData.append('file', file);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,13 +27,11 @@ const PostForm = () => {
             return;
         }
 
-        const post = {title};
-
         const response = await fetch('/api/post', {
             method: 'POST',
-            body: JSON.stringify(post),
+            body: formData,
             headers: {
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${user.token}`
             }
         });
@@ -35,10 +43,11 @@ const PostForm = () => {
         }
 
         if (response.ok) {
-            setTitle('');
+            // setTitle('');
             setError(null);
             console.log('New Post Added', json);
             dispatch({type: 'CREATE_POST', payload: json});
+            navigate("/");
         }
     }
 
@@ -47,8 +56,13 @@ const PostForm = () => {
             <Header />
             <form className="createPostForm" onSubmit={handleSubmit}>
                 <h2>Add Post</h2>
-                {/* <input type="text" onChange={(e) => setTitle(e.target.value)} className={emptyFields.includes('title') ? 'error' : ''}/> */}
-                <input type="text" onChange={(e) => setTitle(e.target.value)}/>
+                <input type="textarea" value={description} onChange={(e) => setDescription(e.target.value)}/>
+                <input type="textarea" value={hashtags} onChange={(e) => setHashtags(e.target.value)}/>
+                <label className="custom-file-upload">
+                    {/* <input type="file" name="file" value={fileName} onChange={(e) => setFileName(e.target.files[0])}/> */}
+                    <input type="file" name="file" id="file" onChange={(e) => setFile(e.target.files[0])}/>
+                    Upload Picture
+                </label>
                 <button>Create Post</button>
                 {error && <div className="error">{error}</div>}
             </form>

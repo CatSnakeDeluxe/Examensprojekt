@@ -17,31 +17,6 @@ const Login = () => {
 
         await login(username, password);
 
-        // const data = { username, password };
-
-        // const response = await fetch('/api/user/login', {
-        //     method: 'POST',
-        //     mode: 'cors',
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // });
-
-        // const json = await response.json();
-        // // const data = await response.json();
-        // localStorage.setItem('token', json.token); // Store the token in local storage
-        // // setToken(json.token);
-
-        // if (!response.ok) {
-        //     setError(json.error);
-        // }
-
-        // if (response.ok) {
-        //     setError(null);
-        //     console.log('Logged in', json);
-        //     navigate("/");
-        // }
         navigate("/");
     }
 

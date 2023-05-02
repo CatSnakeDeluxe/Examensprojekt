@@ -1,5 +1,5 @@
 import postModel from '../models/postModel.js';
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
@@ -32,13 +32,14 @@ const getSinglePost = async(req, res) => {
 
 // create a new post
 const createPost = async (req, res) => {
-    const { title } = req.body;
-    const token = req.headers.authorization;
-    // add post to db
+    const { description, hashtags } = req.body;
+    const { filename } = req.file;
+
     try {
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        const userId = decodedToken.userId;
-        const newPost = await postModel.create({ title, user: userId });
+        // const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        // const userId = decodedToken.userId;
+        const user_id = req.user._id;
+        const newPost = await postModel.create({ description, hashtags, filename, postedBy: user_id });
         res.status(200).json(newPost);
     } catch (err) {
         res.status(400).json({error: err.message});
