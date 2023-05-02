@@ -9,7 +9,7 @@ const router = express.Router();
 //     res.json({mssg: 'GET all Users'});
 // });
 
-// router.get('/:id', userController.getSingleuser);
+router.get('/:id', userController.getSingleUser);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {

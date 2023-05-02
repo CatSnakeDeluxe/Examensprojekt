@@ -1,19 +1,26 @@
+// import { usePostsContext } from '../../hooks/usePostsContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
 import './UserPage.css';
 
 const UserPage = () => {
+    const { user } = useAuthContext();
+
+    // console.log("USER", user.user.username);
+
+    const imageUrl = `http://localhost:3001/static/${user.user.filename}`;
 
     return (
         <div>
             <Header />
             <div className="userPageHeader">
                 <div className="userPageImgContainer">
-                    <img src="" alt="" />
+                    <img src={imageUrl} alt="" />
                 </div>
                 <div>
                     <div>
-                        <h3 className="username">Username</h3>
+                        <h3 className="username">{user.user.username}</h3>
                     </div>
                     <div className="statsContainer">
                         <div className="stat">
@@ -30,9 +37,6 @@ const UserPage = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div>
-                <p>Description</p>
             </div>
             <Nav />
         </div>

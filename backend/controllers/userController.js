@@ -10,10 +10,27 @@ dotenv.config();
 const createToken = (_id) => {
     return jwt.sign({_id}, process.env.JWT_SECRET, { expiresIn: '3d' });
 }
+
+// get a single user
+const getSingleUser = async(req, res) => {
+  const { id } = req.params;
+
+  if(!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({error: 'No user Found'});
+  }
+
+  const singleUser = await userModel.findById(id);
+
+  if(!singleUser) {
+      return res.status(404).json({error: 'No user Found'});
+  }
+
+  res.status(200).json(singleUser);
+}
   
 // login a user
 const loginUser = async (req, res) => {
-  const {username, password} = req.body
+  const { username, password } = req.body
 
   try {
     const user = await userModel.login(username, password);
@@ -46,4 +63,4 @@ const { filename } = req.file;
   }
 }
 
-export default { signupUser, loginUser }
+export default { getSingleUser, signupUser, loginUser }

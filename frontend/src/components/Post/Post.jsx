@@ -11,7 +11,7 @@ const Post = ({ post }) => {
             return;
         }
 
-        const response = await fetch('/api/protected/post/' + post._id, {
+        const response = await fetch('/api/post/' + post._id, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`
