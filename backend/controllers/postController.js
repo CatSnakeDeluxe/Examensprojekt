@@ -13,6 +13,16 @@ const getAllPosts = async (req, res) => {
     res.status(200).json(posts);
 }
 
+// get all posts for single user
+// const getAllPostsByOneUser = async (req, res) => {
+//     const { id } = req.params;
+
+//     const posts = await postModel.find({ postedBy: id }).sort({createdAt: -1});
+
+//     // send posts to client
+//     res.status(200).json(posts);
+// }
+
 // get a single post
 const getSinglePost = async(req, res) => {
     const { id } = req.params;

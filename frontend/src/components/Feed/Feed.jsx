@@ -35,7 +35,6 @@ const Feed = () => {
     return (
         <div className="feedContainer">
             <Header />
-            <h2>Feed</h2>
             <div className='posts'>
                 {posts && posts.map((post) => (
                     <Post key={post._id} post={post} />

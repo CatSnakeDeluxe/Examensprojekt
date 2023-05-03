@@ -9,6 +9,7 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [description, setDescription] = useState('');
     const [file, setFile] = useState('');
     const [error, setError] = useState(null);
 
@@ -16,6 +17,7 @@ const Signup = () => {
     if (email) formData.append('email', email);
     if (username) formData.append('username', username);
     if (password) formData.append('password', password);
+    if (description) formData.append('description', description);
     if (file) formData.append('file', file);
     console.log('FILE:', file);
 
@@ -38,6 +40,7 @@ const Signup = () => {
                 <input type="email" name="email" id="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
                 <input type="text" name="username" id="username" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)}/>
                 <input type="password" name="password" id="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
+                <textarea rows="5" name="description" id="description" placeholder="Write something about yourself..." value={description} onChange={e => setDescription(e.target.value)}/>
                 <label className="custom-file-upload">
                     {/* <input type="file" name="file" value={fileName} onChange={(e) => setFileName(e.target.files[0])}/> */}
                     <input type="file" name="file" id="file" onChange={(e) => setFile(e.target.files[0])}/>
