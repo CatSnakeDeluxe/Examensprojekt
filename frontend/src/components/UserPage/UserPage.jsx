@@ -6,9 +6,6 @@ import './UserPage.css';
 
 const UserPage = () => {
     const { user } = useAuthContext();
-
-    // console.log("USER", user.user.username);
-
     const imageUrl = `http://localhost:3001/static/${user.user.filename}`;
 
     return (
@@ -37,6 +34,12 @@ const UserPage = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                <p className="userPageDescription">{user.user.description}</p>
+            </div>
+            <div>
+
             </div>
             <Nav />
         </div>

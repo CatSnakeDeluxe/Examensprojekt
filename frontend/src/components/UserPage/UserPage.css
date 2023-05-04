@@ -39,3 +39,8 @@
     font-family: 'Grand Hotel', cursive;
     font-size: 1.1rem;
 }
+
+.userPageDescription {
+    font-size: 0.8rem;
+    padding: 0.8rem 1.4rem;
+}

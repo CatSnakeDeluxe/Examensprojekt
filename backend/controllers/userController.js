@@ -1,4 +1,5 @@
 import userModel from '../models/userModel.js';
+import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -25,6 +26,7 @@ const getSingleUser = async(req, res) => {
       return res.status(404).json({error: 'No user Found'});
   }
 
+  // console.log("SINGLEUSER:", singleUser);
   res.status(200).json(singleUser);
 }
   
@@ -46,13 +48,13 @@ const loginUser = async (req, res) => {
 
 // signup a user
 const signupUser = async (req, res) => {
-const { email, username, password } = req.body;
+const { email, username, password, description } = req.body;
 const { filename } = req.file;
 
 // console.log('REQUEST VALUES:', email, username, password, req.file);
 
   try {
-    const user = await userModel.signup(email, username, password, filename);
+    const user = await userModel.signup(email, username, password, description, filename);
 
     // create a token
     const token = createToken(user._id);

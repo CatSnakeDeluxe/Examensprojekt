@@ -5,6 +5,7 @@
     bottom: 0;
     width: 100%;
     padding: 0.8rem 0;
+    background: var(--black);
 }
 
 .fa-door-open, .fa-magnifying-glass, .fa-plus, .fa-house-chimney, .fa-user {

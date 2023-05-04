@@ -1,8 +1,6 @@
 import React from 'react';
-// import { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthContext } from './hooks/useAuthContext';
-// import Nav from './components/Nav/Nav';
+// import { useAuthContext } from './hooks/useAuthContext';
 import Login from './components/Login/Login';
 import Signup from './components/Signup/Signup';
 import Feed from './components/Feed/Feed';
@@ -14,8 +12,10 @@ import Chat from './components/Chat/Chat';
 import "./App.css";
 
 function App() {
-  const { user } = useAuthContext();
-
+  // const { user } = useAuthContext();
+  // console.log(user);
+  const user = localStorage.getItem('user');
+  
   return (
     <div className="App">
       <Routes>
