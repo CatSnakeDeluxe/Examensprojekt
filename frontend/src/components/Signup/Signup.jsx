@@ -19,7 +19,7 @@ const Signup = () => {
     if (password) formData.append('password', password);
     if (description) formData.append('description', description);
     if (file) formData.append('file', file);
-    console.log('FILE:', file);
+    // console.log('FILE:', file);
 
     const { signup } = useSignup();
 
