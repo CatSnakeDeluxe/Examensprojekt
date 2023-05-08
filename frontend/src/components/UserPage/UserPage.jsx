@@ -1,4 +1,6 @@
-// import { usePostsContext } from '../../hooks/usePostsContext';
+import { useEffect } from 'react';
+import Post from '../Post/Post';
+import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
@@ -7,6 +9,30 @@ import './UserPage.css';
 const UserPage = () => {
     const { user } = useAuthContext();
     const imageUrl = `http://localhost:3001/static/${user.user.filename}`;
+    const { posts, dispatch } = usePostsContext();
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            const response = await fetch(`/api/post?userId=${user.user._id}`, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+
+            const json = await response.json();
+            const userPosts = json.filter(post => post.user === user.user._id);
+    
+            if(response.ok) {
+                console.log(userPosts);
+                dispatch({type: 'SET_POSTS', payload: userPosts});
+            }
+        }
+    
+        if (user) {
+            fetchPosts();
+        }
+        
+    }, [dispatch, user]);
 
     return (
         <div>
@@ -38,8 +64,10 @@ const UserPage = () => {
             <div>
                 <p className="userPageDescription">{user.user.description}</p>
             </div>
-            <div>
-
+            <div className="posts">
+                {posts && posts.map((post) => (
+                    <Post key={post._id} post={post} />
+                ))}
             </div>
             <Nav />
         </div>

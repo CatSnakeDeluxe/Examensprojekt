@@ -9,6 +9,7 @@ import './Feed.css';
 const Feed = () => {
     const { posts, dispatch } = usePostsContext();
     const { user } = useAuthContext();
+    console.log("Hello from feed");
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -35,7 +36,7 @@ const Feed = () => {
     return (
         <div className="feedContainer">
             <Header />
-            <div className='posts'>
+            <div className="posts">
                 {posts && posts.map((post) => (
                     <Post key={post._id} post={post} />
                 ))}
