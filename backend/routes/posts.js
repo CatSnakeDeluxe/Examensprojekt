@@ -21,6 +21,8 @@ router.use(requireAuth);
 // get all posts
 router.get('/', postController.getAllPosts);
 
+router.get('/userposts', postController.getAllUserPosts);
+
 // get a single post
 router.get('/:id', postController.getSinglePost);
 

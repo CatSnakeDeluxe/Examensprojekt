@@ -1,5 +1,4 @@
 import postModel from '../models/postModel.js';
-// import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
@@ -13,15 +12,14 @@ const getAllPosts = async (req, res) => {
     res.status(200).json(posts);
 }
 
-// get all posts for single user
-// const getAllPostsByOneUser = async (req, res) => {
-//     const { id } = req.params;
+// get all posts for one user
+const getAllUserPosts = async (req, res) => {
+    console.log("USERID", req.user._id);
+    const posts = await postModel.find({ postedBy: req.user._id }).sort({createdAt: -1});
 
-//     const posts = await postModel.find({ postedBy: id }).sort({createdAt: -1});
-
-//     // send posts to client
-//     res.status(200).json(posts);
-// }
+    // send posts to client
+    res.status(200).json(posts);
+}
 
 // get a single post
 const getSinglePost = async(req, res) => {
@@ -92,4 +90,4 @@ const updatePost =  async (req, res) => {
     res.status(200).json(postToUpdate);
 }
 
-export default { getAllPosts, getSinglePost, createPost, deletePost, updatePost }
+export default { getAllPosts, getAllUserPosts, getSinglePost, createPost, deletePost, updatePost }

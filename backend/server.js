@@ -11,7 +11,6 @@ dotenv.config();
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/static', express.static('public/uploads'));
 

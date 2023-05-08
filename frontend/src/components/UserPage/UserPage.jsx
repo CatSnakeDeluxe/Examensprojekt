@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Post from '../Post/Post';
+import PostPreview from '../PostPreview/PostPreview';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Header from '../Header/Header';
@@ -12,19 +13,21 @@ const UserPage = () => {
     const { posts, dispatch } = usePostsContext();
 
     useEffect(() => {
+        // `/api/post?userId=${user.user._id}`
         const fetchPosts = async () => {
-            const response = await fetch(`/api/post?userId=${user.user._id}`, {
+            const response = await fetch(`/api/post/userposts`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
 
             const json = await response.json();
-            const userPosts = json.filter(post => post.user === user.user._id);
+            // const userPosts = json.filter(post => post.user === user.user._id);
     
             if(response.ok) {
-                console.log(userPosts);
-                dispatch({type: 'SET_POSTS', payload: userPosts});
+                // console.log(user.user._id)
+                // console.log(userPosts);
+                dispatch({type: 'SET_POSTS', payload: json});
             }
         }
     
@@ -64,9 +67,9 @@ const UserPage = () => {
             <div>
                 <p className="userPageDescription">{user.user.description}</p>
             </div>
-            <div className="posts">
+            <div className="postsUserPage">
                 {posts && posts.map((post) => (
-                    <Post key={post._id} post={post} />
+                    <PostPreview key={post._id} post={post} />
                 ))}
             </div>
             <Nav />

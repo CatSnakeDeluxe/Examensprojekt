@@ -44,3 +44,10 @@
     font-size: 0.8rem;
     padding: 0.8rem 1.4rem;
 }
+
+.postsUserPage {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
