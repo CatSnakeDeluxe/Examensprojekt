@@ -13,7 +13,7 @@ import "./App.css";
 
 function App() {
   const { user } = useAuthContext();
-  // console.log(user);
+  console.log("APP", user);
   // const user = localStorage.getItem('user');
   
   return (

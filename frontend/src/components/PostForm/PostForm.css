@@ -1,0 +1,44 @@
+.createPostForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+}
+
+.createPostForm input[type="email"], input[type="text"], input[type="password"] {
+    text-align: center;
+    padding: 1rem 1rem 0.3rem 1rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--white);
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.createPostForm textarea {
+    padding: 1rem 1rem 0.3rem 1rem;
+    background: transparent;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 2px solid var(--white);
+    outline: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--white);
+    text-align: center;
+    resize: none;
+}
+
+.createPostForm input[type="submit"] {
+    padding: 0.4rem 2rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+    font-weight: 800;
+    border-width: 3px;
+    border-radius: 5px;
+    border-style: solid;
+    border-image: linear-gradient(to right, var(--yellow), var(--orange)) 1;
+    align-self: center;
+}

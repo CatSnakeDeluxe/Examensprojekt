@@ -19,7 +19,7 @@ const Signup = () => {
     if (password) formData.append('password', password);
     if (description) formData.append('description', description);
     if (file) formData.append('file', file);
-    // console.log('FILE:', file);
+    // console.log('FILE:', file.name);
 
     const { signup } = useSignup();
 
@@ -46,6 +46,7 @@ const Signup = () => {
                     <input type="file" name="file" id="file" onChange={(e) => setFile(e.target.files[0])}/>
                     Upload Profile Picture
                 </label>
+                <p className="uploadFilename">{file.name}</p>
                 <input className="gradientText" type="submit" value="Register" />  
                 {error && <div className="error">{error}</div>}
             </form>
