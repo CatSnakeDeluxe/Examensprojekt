@@ -24,7 +24,7 @@ router.get('/', postController.getAllPosts);
 router.get('/userposts', postController.getAllUserPosts);
 
 // get a single post
-router.get('/:id', postController.getSinglePost);
+router.get('/userposts/:id', postController.getSinglePost);
 
 // post a post
 router.post('/', upload.single('file'), postController.createPost);

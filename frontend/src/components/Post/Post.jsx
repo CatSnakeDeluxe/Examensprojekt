@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import './Post.css';
 
 const Post = ({ post }) => {
-    // const { dispatch } = usePostsContext();
     const { user } = useAuthContext();
     const [username, setUsername] = useState('');
     const [profileImg, setProfileImg] = useState('');
@@ -33,21 +32,6 @@ const Post = ({ post }) => {
                 }
         }
     }
-
-    // const fetchPostedBy = async () => {
-    //     const singleUser = await fetch('/api/user/' + post.postedBy, {
-    //         headers: {
-    //             'Authorization': `Bearer ${user.token}`
-    //         }
-    //     });
-
-    //     const postedByUser = await singleUser.json();
-
-    //     console.log("postedByUser", postedByUser);
-    //     console.log(postedByUser.username);
-    // }
-
-    // fetchPostedBy();
 
     useEffect(() => {
         const fetchPostedBy = async () => {

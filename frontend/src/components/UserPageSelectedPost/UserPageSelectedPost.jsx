@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
 import Post from '../Post/Post';
-// import PostPreview from '../PostPreview/PostPreview';
+import { useParams } from 'react-router-dom';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
-import './UserPage.css';
 
-const UserPage = () => {
+const UserPageSelectedPost = () => {
     const { user } = useAuthContext();
     const imageUrl = `http://localhost:3001/static/${user.user.filename}`;
     const { posts, dispatch } = usePostsContext();
+    const { id } = useParams();
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const response = await fetch(`/api/post/userposts`, {
+            const response = await fetch(`/api/post/userposts/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -31,7 +31,9 @@ const UserPage = () => {
             fetchPosts();
         }
         
-    }, [dispatch, user]);
+    }, [dispatch, user, id]);
+
+    console.log(posts);
 
     return (
         <div>
@@ -64,19 +66,11 @@ const UserPage = () => {
                 <p className="userPageDescription">{user.user.description}</p>
             </div>
             <div className="postsUserPage">
-                {posts && posts.map((post) => (
-                    <div key={`div-${post._id}`}>
-                        <Post key={post._id} post={post} />
-                        <div className="btnContainer" key={`btnContainer-${post._id}`}>
-                            <button className="deleteBtn" key={`delete-${post._id}`}>Delete</button>
-                            <button className="editBtn" key={`edit-${post._id}`}>Edit</button>
-                        </div>
-                    </div>
-                ))}
+                {/* <Post post={post} /> */}
             </div>
             <Nav />
         </div>
     )
 }
  
-export default UserPage;
+export default UserPageSelectedPost;

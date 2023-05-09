@@ -14,7 +14,7 @@ const getAllPosts = async (req, res) => {
 
 // get all posts for one user
 const getAllUserPosts = async (req, res) => {
-    console.log("USERID", req.user._id);
+    // console.log("USERID", req.user._id);
     const posts = await postModel.find({ postedBy: req.user._id }).sort({createdAt: -1});
 
     // send posts to client
@@ -24,6 +24,8 @@ const getAllUserPosts = async (req, res) => {
 // get a single post
 const getSinglePost = async(req, res) => {
     const { id } = req.params;
+    console.log("POST ID:", id);
+    // console.log("REQ:", req);
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error: 'No Post Found'});

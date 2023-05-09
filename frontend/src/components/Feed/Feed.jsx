@@ -9,7 +9,6 @@ import './Feed.css';
 const Feed = () => {
     const { posts, dispatch } = usePostsContext();
     const { user } = useAuthContext();
-    console.log("Hello from feed");
 
     useEffect(() => {
         const fetchPosts = async () => {
