@@ -1,5 +1,5 @@
 {
-  "proxy": "https://postr-backend.onrender.com:10000",
+  "proxy": "http://139.144.79.42:3001/",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
