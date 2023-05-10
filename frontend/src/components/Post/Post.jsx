@@ -1,10 +1,9 @@
-// import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEffect, useState } from 'react';
+import URL from '../../url';
 import './Post.css';
 
 const Post = ({ post }) => {
-    // const { dispatch } = usePostsContext();
     const { user } = useAuthContext();
     const [username, setUsername] = useState('');
     const [profileImg, setProfileImg] = useState('');
@@ -34,24 +33,9 @@ const Post = ({ post }) => {
         }
     }
 
-    // const fetchPostedBy = async () => {
-    //     const singleUser = await fetch('/api/user/' + post.postedBy, {
-    //         headers: {
-    //             'Authorization': `Bearer ${user.token}`
-    //         }
-    //     });
-
-    //     const postedByUser = await singleUser.json();
-
-    //     console.log("postedByUser", postedByUser);
-    //     console.log(postedByUser.username);
-    // }
-
-    // fetchPostedBy();
-
     useEffect(() => {
         const fetchPostedBy = async () => {
-            const singleUser = await fetch('/api/user/' + post.postedBy, {
+            const singleUser = await fetch(`${URL}/api/user/${post.postedBy}`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -81,8 +65,8 @@ const Post = ({ post }) => {
     //     }
     // }
 
-    const imageUrlPost = `http://localhost:3001/static/${post.filename}`;
-    const imageUrlProfile = `http://localhost:3001/static/${profileImg}`;
+    const imageUrlPost = `${URL}/static/${post.filename}`;
+    const imageUrlProfile = `${URL}/static/${profileImg}`;
 
     return (
         <div className="post">

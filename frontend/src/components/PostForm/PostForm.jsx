@@ -2,6 +2,7 @@ import { useState } from "react";
 import { usePostsContext } from "../../hooks/usePostsContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import URL from '../../url';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
 import './PostForm.css';
@@ -28,7 +29,7 @@ const PostForm = () => {
             return;
         }
 
-        const response = await fetch('/api/post', {
+        const response = await fetch(`${URL}/api/post`, {
             method: 'POST',
             body: formData,
             headers: {

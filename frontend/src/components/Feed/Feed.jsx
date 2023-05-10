@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Post from '../Post/Post';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import URL from '../../url';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
 import './Feed.css';
@@ -9,11 +10,10 @@ import './Feed.css';
 const Feed = () => {
     const { posts, dispatch } = usePostsContext();
     const { user } = useAuthContext();
-    console.log("Hello from feed");
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const response = await fetch('/api/post', {
+            const response = await fetch(`${URL}/api/post`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }

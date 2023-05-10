@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import Post from '../Post/Post';
+import { Link } from "react-router-dom";
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
 import './UserPage.css';
+import URL from '../../url';
 
 const UserPage = () => {
     const { user } = useAuthContext();
@@ -13,18 +15,16 @@ const UserPage = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const response = await fetch(`/api/post?userId=${user.user._id}`, {
+            const response = await fetch(`${URL}/api/post/userposts`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
 
             const json = await response.json();
-            const userPosts = json.filter(post => post.user === user.user._id);
-    
+
             if(response.ok) {
-                console.log(userPosts);
-                dispatch({type: 'SET_POSTS', payload: userPosts});
+                dispatch({type: 'SET_POSTS', payload: json});
             }
         }
     
@@ -33,6 +33,21 @@ const UserPage = () => {
         }
         
     }, [dispatch, user]);
+
+        const handleDelete = async(id) => {
+        const response = await fetch(`${URL}/api/post/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${user.token}`
+            }
+        });
+
+        const json = await response.json();
+
+        if (response.ok) {
+            dispatch({type: 'DELETE_POST', payload: json});
+        }
+    }
 
     return (
         <div>
@@ -64,9 +79,15 @@ const UserPage = () => {
             <div>
                 <p className="userPageDescription">{user.user.description}</p>
             </div>
-            <div className="posts">
+            <div className="postsUserPage">
                 {posts && posts.map((post) => (
-                    <Post key={post._id} post={post} />
+                    <div key={`div-${post._id}`}>
+                        <Post key={post._id} post={post} />
+                        <div className="btnContainer" key={`btnContainer-${post._id}`}>
+                            <button onClick={() => handleDelete(post._id)} className="deleteBtn" key={`delete-${post._id}`}>Delete</button>
+                            <Link to="/userPage/edit"><button className="editBtn" key={`edit-${post._id}`}>Edit</button></Link>
+                        </div>
+                    </div>
                 ))}
             </div>
             <Nav />
