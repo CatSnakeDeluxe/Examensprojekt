@@ -6,6 +6,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
 import './UserPage.css';
+import URL from '../../url';
 
 const UserPage = () => {
     const { user } = useAuthContext();
@@ -14,7 +15,7 @@ const UserPage = () => {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const response = await fetch(`/api/post/userposts`, {
+            const response = await fetch(`${URL}/api/post/userposts`, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -34,7 +35,7 @@ const UserPage = () => {
     }, [dispatch, user]);
 
         const handleDelete = async(id) => {
-        const response = await fetch(`/api/post/${id}`, {
+        const response = await fetch(`${URL}/api/post/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`

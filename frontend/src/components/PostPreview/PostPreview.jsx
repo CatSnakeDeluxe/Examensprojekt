@@ -1,7 +1,8 @@
 import './PostPreview.css';
+import URL from '../../url';
 
 const PostPreview = ({ post }) => {
-    const imageUrlPost = `http://localhost:3001/static/${post.filename}`;
+    const imageUrlPost = `${URL}/static/${post.filename}`;
     const selectedPost = `/userPage/${post._id}`;
     return (
         <div className="postPreviewImgContainer">

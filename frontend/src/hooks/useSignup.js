@@ -1,5 +1,7 @@
-import { useState } from 'react'
-import { useAuthContext } from './useAuthContext'
+import { useState } from 'react';
+import { useAuthContext } from './useAuthContext';
+import URL from '../url';
+
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
@@ -10,7 +12,7 @@ export const useSignup = () => {
     // setIsLoading(true)
     setError(null);
 
-    const response = await fetch('/api/user/signup', {
+    const response = await fetch(`${URL}/api/user/signup`, {
       method: 'POST',
       // headers: {'Content-Type': 'application/json'},
       // headers: {'Content-type': 'multipart/form-data'},
