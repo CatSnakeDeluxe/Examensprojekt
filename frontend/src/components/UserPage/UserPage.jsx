@@ -10,7 +10,7 @@ import URL from '../../url';
 
 const UserPage = () => {
     const { user } = useAuthContext();
-    const imageUrl = `http://localhost:3001/static/${user.user.filename}`;
+    const imageUrl = `${URL}/static/${user.user.filename}`;
     const { posts, dispatch } = usePostsContext();
 
     useEffect(() => {
