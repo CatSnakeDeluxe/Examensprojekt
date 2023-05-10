@@ -6,7 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "client": "cd frontend && npm start",
+    "server": "cd backend && npm start",
+    "live": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
