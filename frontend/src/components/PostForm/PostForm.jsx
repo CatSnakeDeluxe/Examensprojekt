@@ -4,6 +4,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
+import './PostForm.css';
 
 const PostForm = () => {
     const navigate = useNavigate();
@@ -55,15 +56,16 @@ const PostForm = () => {
         <div>
             <Header />
             <form className="createPostForm" onSubmit={handleSubmit}>
-                <h2>Add Post</h2>
-                <input type="textarea" value={description} onChange={(e) => setDescription(e.target.value)}/>
-                <input type="textarea" value={hashtags} onChange={(e) => setHashtags(e.target.value)}/>
+                <h2>Create New Post</h2>
                 <label className="custom-file-upload">
                     {/* <input type="file" name="file" value={fileName} onChange={(e) => setFileName(e.target.files[0])}/> */}
                     <input type="file" name="file" id="file" onChange={(e) => setFile(e.target.files[0])}/>
                     Upload Picture
                 </label>
-                <button>Create Post</button>
+                <p className="uploadFilename">{file.name}</p>
+                <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Write a description"/>
+                <input type="text" value={hashtags} onChange={(e) => setHashtags(e.target.value)} placeholder="Add hashtags"/>
+                <input className="gradientText" type="submit" value="Create" />
                 {error && <div className="error">{error}</div>}
             </form>
             <Nav />

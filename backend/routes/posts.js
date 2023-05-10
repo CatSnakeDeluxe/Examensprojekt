@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   }
 });
 
-let upload = multer({ storage: storage, limits: {filesize: 300000 }});
+let upload = multer({ storage: storage, limits: { filesize: 300000 }});
 
 const router = express.Router();
 router.use(requireAuth);
