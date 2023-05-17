@@ -7,6 +7,8 @@ const Post = ({ post }) => {
     const { user } = useAuthContext();
     const [username, setUsername] = useState('');
     const [profileImg, setProfileImg] = useState('');
+    const isLiked = Boolean(post.likes[user.user._id]);
+    const likeCount = Object.keys(post.likes).length;
 
     function timeSince(timestamp) {
         let time = Date.parse(timestamp);
@@ -51,22 +53,25 @@ const Post = ({ post }) => {
         
     }, [user]);
 
-    // const handleDelete = async() => {
-    //     const response = await fetch('/api/post/' + post._id, {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'Authorization': `Bearer ${user.token}`
-    //         }
-    //     });
-    //     const json = await response.json();
-
-    //     if (response.ok) {
-    //         dispatch({type: 'DELETE_POST', payload: json});
-    //     }
-    // }
-
     const imageUrlPost = `${URL}/static/${post.filename}`;
     const imageUrlProfile = `${URL}/static/${profileImg}`;
+
+    const patchLike = async (id) => {
+        const response = await fetch(`${URL}/api/post/${id}/like`, {
+          method: "PATCH",
+          headers: {
+            'Authorization': `Bearer ${user.token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: user.user._id }),
+        });
+
+        // const updatedPost = await response.json();
+
+        console.log('POST TO UPDATE:', response);
+
+        // dispatch({type: 'SET_POSTS', payload: updatedPost});
+    };
 
     return (
         <div className="post">
@@ -88,8 +93,8 @@ const Post = ({ post }) => {
             </div>
             <div className="iconsContainer">
                 <div className="likesContainer">
-                    <i className="fa-regular fa-heart"></i>
-                    <p className="likes">3</p>
+                    <i onClick={() => patchLike(post._id)} className="fa-regular fa-heart"></i>
+                    <p className="likes">{likeCount}</p>
                 </div>
                 <div>
                     <i className="fa-regular fa-bookmark"></i>
@@ -100,7 +105,6 @@ const Post = ({ post }) => {
                 <p className="description">{post.description}</p>
                 <p className="hashtags">{post.hashtags}</p>
             </div>
-            {/* <span onClick={handleDelete}>Delete</span> */}
         </div>
     )
 }

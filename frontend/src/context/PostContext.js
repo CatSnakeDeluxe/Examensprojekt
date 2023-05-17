@@ -16,6 +16,17 @@ export const postsReducer = (state, action) => {
             return {
                 posts: state.posts.filter((p) => p._id !== action.payload._id)
             }
+        case 'EDIT_POST':
+            return {
+                posts: state.posts.map(p => {
+                    if (p._id === action.payload._id) {
+                    return action.payload;
+                    } else {
+                    return p;
+                    }
+                })
+            }
+
         default:
             return state
     }
@@ -32,4 +43,3 @@ export const PostContextProvider = ({ children }) => {
         </PostContext.Provider>
     )
 }
-

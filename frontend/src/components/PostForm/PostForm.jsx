@@ -45,7 +45,6 @@ const PostForm = () => {
         }
 
         if (response.ok) {
-            // setTitle('');
             setError(null);
             console.log('New Post Added', json);
             dispatch({type: 'CREATE_POST', payload: json});

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Post from '../Post/Post';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Header from '../Header/Header';
@@ -9,6 +9,8 @@ import './UserPage.css';
 import URL from '../../url';
 
 const UserPage = () => {
+    const navigate = useNavigate();
+
     const { user } = useAuthContext();
     const imageUrl = `${URL}/static/${user.user.filename}`;
     const { posts, dispatch } = usePostsContext();
@@ -35,7 +37,7 @@ const UserPage = () => {
     }, [dispatch, user]);
 
         const handleDelete = async(id) => {
-        const response = await fetch(`${URL}/api/post/${id}`, {
+        const response = await fetch(`${URL}/api/post/userposts/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${user.token}`
@@ -47,6 +49,10 @@ const UserPage = () => {
         if (response.ok) {
             dispatch({type: 'DELETE_POST', payload: json});
         }
+    }
+
+    const handleEdit = async(id) => {
+        navigate(`/userPage/edit/${id}`);
     }
 
     return (
@@ -81,11 +87,11 @@ const UserPage = () => {
             </div>
             <div className="postsUserPage">
                 {posts && posts.map((post) => (
-                    <div key={`div-${post._id}`}>
+                    <div className="userPosts" key={`div-${post._id}`}>
                         <Post key={post._id} post={post} />
                         <div className="btnContainer" key={`btnContainer-${post._id}`}>
                             <button onClick={() => handleDelete(post._id)} className="deleteBtn" key={`delete-${post._id}`}>Delete</button>
-                            <Link to="/userPage/edit"><button className="editBtn" key={`edit-${post._id}`}>Edit</button></Link>
+                            <button onClick={() => handleEdit(post._id)} className="editBtn" key={`edit-${post._id}`}>Edit</button>
                         </div>
                     </div>
                 ))}

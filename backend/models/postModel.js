@@ -19,22 +19,18 @@ const postSchema = new Schema({
         type: mongoose.Schema.ObjectId, 
         ref: "user"
     },
-    commentsCount: {
-        type: Number,
-        default: 0
-    },
     comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "comment"
+        types: Array, 
+        default: []
     }],
-    likesCount: {
-        type: Number,
-        default: 0
-    },
     likes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "like"
+        types: Array, 
+        default: []
     }],
+    // likes: [{
+    //     type: Map, 
+    //     of: Boolean
+    // }],
 }, { timestamps: true });
 
 const postModel = mongoose.model("post", postSchema);

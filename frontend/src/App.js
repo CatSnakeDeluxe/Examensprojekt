@@ -8,7 +8,7 @@ import Search from './components/Search/Search';
 import PostForm from './components/PostForm/PostForm';
 import UserPage from './components/UserPage/UserPage';
 import Notification from './components/Notification/Notification';
-// import UserPageSelectedPost from './components/UserPageSelectedPost/UserPageSelectedPost';
+import EditForm from './components/EditForm/EditForm';
 import Chat from './components/Chat/Chat';
 import "./App.css";
 
@@ -24,7 +24,7 @@ function App() {
         <Route path="/search" element={user ? <Search /> : <Navigate to="/login" />}/>
         <Route path="/createPost" element={user ? <PostForm /> : <Navigate to="/login" />}/>
         <Route path="/userPage" element={user ? <UserPage /> : <Navigate to="/login" />}/>
-        {/* <Route path="/userPage/:id" element={user ? <UserPageSelectedPost /> : <Navigate to="/login" />}/> */}
+        <Route path="/userPage/edit/:id" element={user ? <EditForm /> : <Navigate to="/login" />}/>
         <Route path="/notification" element={user ? <Notification /> : <Navigate to="/login" />}/>
         <Route path="/chat" element={user ? <Chat /> : <Navigate to="/login" />}/>
       </Routes>
