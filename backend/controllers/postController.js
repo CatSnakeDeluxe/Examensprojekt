@@ -14,7 +14,6 @@ const getAllPosts = async (req, res) => {
 
 // get all posts for one user
 const getAllUserPosts = async (req, res) => {
-    // console.log("USERID", req.user._id);
     const posts = await postModel.find({ postedBy: req.user._id }).sort({createdAt: -1});
 
     // send posts to client
@@ -46,8 +45,6 @@ const createPost = async (req, res) => {
     const { filename } = req.file;
 
     try {
-        // const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        // const userId = decodedToken.userId;
         const user_id = req.user._id;
         const newPost = await postModel.create({ description, hashtags, filename, postedBy: user_id });
         res.status(200).json(newPost);
@@ -81,15 +78,46 @@ const updatePost =  async (req, res) => {
         return res.status(404).json({error: 'No Post Found'});
     }
 
-    const postToUpdate = await postModel.findOneAndUpdate({_id: id}, {
-        ...req.body
-    });
+    const postToUpdate = await postModel.findById(id);
+
+    postToUpdate.description = req.body.description;
+    postToUpdate.hashtags = req.body.hashtags;
+    postToUpdate.filename = req.file.filename;
 
     if(!postToUpdate) {
         return res.status(400).json({error: 'No Post Found'});
     }
 
+    await postToUpdate.save();
+
     res.status(200).json(postToUpdate);
 }
 
-export default { getAllPosts, getAllUserPosts, getSinglePost, createPost, deletePost, updatePost }
+// delete a post
+const likePost =  async (req, res) => {
+    // const id = '64636002d5ce1124e161a7e0';
+    // const userId = '645224d67a83027d838356c9';
+
+    const { id } = req.params;
+    const { user_id } = req.body;
+
+    // const post = await postModel.findById(id);
+    // const isLiked = post.likes.get(user_id);
+    // console.log(post.likes)
+
+    // if (isLiked) {
+    //     post.likes.delete(user_id);
+    // } else {
+    //     post.likes.set(user_id, true);
+    // }
+
+    const updatedPost = await postModel.findByIdAndUpdate(
+        id,
+        { likes: user_id },
+        // { new: true }
+    );
+
+    res.status(200).json(updatedPost);
+}
+
+export default { getAllPosts, getAllUserPosts, getSinglePost, createPost, deletePost, updatePost, likePost }

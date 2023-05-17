@@ -39,3 +39,13 @@ Tillslut fungerar min authentication efter att ha bytt ut en rad i authcontext. 
 ## Datum: 23-05-09
 Efter många försök att få min userPage att använda sig av PostPreview komponenten har jag bytt till att bara använda mig av Post komponenten. Det kraschade när man försökte gå i mellan och det blev även problem med id, då de bara är för utseendets skull så väntar jag med att få till det. Jag har fått till så det kommer upp knappar vid varje post på userPage, en för edit och en för delete. Jag har fått delete funktionen att fungera som den ska. Johannes har hjälpt mig med Linode och jag borde inte vara långt bort nu. i pm2 logs får jag - Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
 2|frontend |  - options.allowedHosts[0] should be a non-empty string. och i webbläsaren får jag - 502 Bad Gateway.
+## Datum: 23-05-10
+Jag har fått till det på Linode tillslut - problemet var att jag använde mig av en proxy i package.json i min frontend mapp. Jag bytte ut den mot en fil som heter url.js där jag bestämmer vilken url som requests ska göras till.
+## Datum: 23-05-11
+Jag har skapat en EditForm komponent som hämtar information om en post och visar det i formuläret.
+## Datum: 23-05-15
+Jag har kämpat vidare med min editfunktion som inte alls vill fungera, jag tror att det kanske kan vara context som krånglar då jag är osäker på hur koden ska se ut där för just EDIT_POST.
+## Datum: 23-05-16
+Jag har hittat ett fel i min editfunktion, formdata uppdateras inte i min handlesubmit.
+## Datum: 23-05-17
+Jag hade glömt upload single file i min post route och så var det fel i postcontext men nu fungerar editfunktionen ish. Man kan ändra description och hashtags men inte byta bild.

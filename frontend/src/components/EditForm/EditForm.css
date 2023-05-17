@@ -1,0 +1,18 @@
+.editPostForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+}
+
+.editPostForm input[type="submit"] {
+    padding: 0.4rem 2rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+    font-weight: 800;
+    border-width: 3px;
+    border-radius: 5px;
+    border-style: solid;
+    border-image: linear-gradient(to right, var(--yellow), var(--orange)) 1;
+    align-self: center;
+}

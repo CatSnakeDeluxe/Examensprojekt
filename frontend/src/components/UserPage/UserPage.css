@@ -52,10 +52,18 @@
     justify-content: center;
 }
 
+.userPosts:last-child {
+    margin-bottom: 3rem;
+}
+
 .btnContainer {
     display: flex;
     justify-content: center;
 }
+
+/* .post:last-child {
+    border: 2px solid  #FF7373;
+} */
 
 .deleteBtn, .editBtn {
     background: transparent;

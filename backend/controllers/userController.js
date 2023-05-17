@@ -3,9 +3,6 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-// import multer from 'multer';
-// import { v4 as uuidv4 } from 'uuid';
-
 dotenv.config();
 
 const createToken = (_id) => {

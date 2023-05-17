@@ -21,18 +21,22 @@ router.use(requireAuth);
 // get all posts
 router.get('/', postController.getAllPosts);
 
+// post a post
+router.post('/', upload.single('file'), postController.createPost);
+
+// get all posts for one user
 router.get('/userposts', postController.getAllUserPosts);
 
 // get a single post
 router.get('/userposts/:id', postController.getSinglePost);
 
-// post a post
-router.post('/', upload.single('file'), postController.createPost);
-
 // delete a post
-router.delete('/:id', postController.deletePost);
+router.delete('/userposts/:id', postController.deletePost);
 
 // update a post
-router.patch('/:id', postController.updatePost);
+router.put('/userposts/:id', upload.single('file'), postController.updatePost);
+
+// likes
+router.patch('/:id/like', postController.likePost);
 
 export default router;
