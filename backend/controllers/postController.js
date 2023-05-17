@@ -14,7 +14,6 @@ const getAllPosts = async (req, res) => {
 
 // get all posts for one user
 const getAllUserPosts = async (req, res) => {
-    // console.log("USERID", req.user._id);
     const posts = await postModel.find({ postedBy: req.user._id }).sort({createdAt: -1});
 
     // send posts to client
@@ -73,7 +72,6 @@ const deletePost =  async (req, res) => {
 
 // update a post
 const updatePost =  async (req, res) => {
-    console.log('INSIDE UPDATE');
     const { id } = req.params;
 
     if(!mongoose.Types.ObjectId.isValid(id)) {
@@ -82,30 +80,16 @@ const updatePost =  async (req, res) => {
 
     const postToUpdate = await postModel.findById(id);
 
-    // console.log('REQ', req);
-
-    // const postToUpdate = await postModel.findOneAndUpdate({_id: id}, {
-    //     ...req.body,
-    //     ...req.file
-    // });
-    console.log('REQ', req);
-    // update description and hashtags from req.body
     postToUpdate.description = req.body.description;
-    
     postToUpdate.hashtags = req.body.hashtags;
-
-    // update file if it exists in req.file
-    if (req.file) {
-    postToUpdate.file = req.file.filename;
-    }
+    postToUpdate.filename = req.file.filename;
 
     if(!postToUpdate) {
         return res.status(400).json({error: 'No Post Found'});
     }
 
-    // save the updated post
     await postToUpdate.save();
-    console.log('postToUpdate', postToUpdate);
+
     res.status(200).json(postToUpdate);
 }
 
