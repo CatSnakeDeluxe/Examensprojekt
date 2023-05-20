@@ -12,12 +12,23 @@ const getAllPosts = async (req, res) => {
     res.status(200).json(posts);
 }
 
-// get all posts for one user
+// get all posts for logged in user
 const getAllUserPosts = async (req, res) => {
+    console.log('USER', req.user._id);
     const posts = await postModel.find({ postedBy: req.user._id }).sort({createdAt: -1});
 
     // send posts to client
     res.status(200).json(posts);
+}
+
+// get all posts for one clicked user
+const getAllUserPostsSelectedUser = async (req, res) => {
+    // const userId = req.params.id.toString();
+    console.log('req.body', req.body);
+    // const posts = await postModel.find({ postedBy: userId }).sort({createdAt: -1});
+
+    // // send posts to client
+    // res.status(200).json(posts);
 }
 
 // get a single post
@@ -128,4 +139,4 @@ const likePost = async (req, res) => {
   };
   
 
-export default { getAllPosts, getAllUserPosts, getSinglePost, createPost, deletePost, updatePost, likePost }
+export default { getAllPosts, getAllUserPosts, getAllUserPostsSelectedUser, getSinglePost, createPost, deletePost, updatePost, likePost }

@@ -53,3 +53,5 @@ Jag hade glömt upload single file i min post route och så var det fel i postco
 Jag har jobbat på min likes funktion och kan nu med en inloggad användare ge en post oändligt med likes.
 ## Datum: 23-05-19
 Jag har jobbat vidare med likes, det blev problem när varje like sparades som ett object i databasen men nu sparas endast användarens id som en sträng. En användare kan endast gilla en gång, klickar man igen så avgillar man posten. Likes fungerar som jag har tänkt men komponenten uppdateras inte så man måste ladda om sidan för att se förändringarna.
+## Datum: 23-05-20
+Jag har tagit en liten paus från likes och har fått till så post/likes visas dynamiskt på userPage.
