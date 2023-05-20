@@ -48,4 +48,8 @@ Jag har kämpat vidare med min editfunktion som inte alls vill fungera, jag tror
 ## Datum: 23-05-16
 Jag har hittat ett fel i min editfunktion, formdata uppdateras inte i min handlesubmit.
 ## Datum: 23-05-17
-Jag hade glömt upload single file i min post route och så var det fel i postcontext men nu fungerar editfunktionen ish. Man kan ändra description och hashtags men inte byta bild.
+Jag hade glömt upload single file i min post route och så var det fel i postcontext men nu fungerar editfunktionen ish. Man kan ändra description och hashtags men inte byta bild. Det var ett fel i controllern där file skulle vara filename, nu fungerar editfunktionen som den ska. Jag har fått till komprimering av bilder med hjälp av multer sharp men filnamnet blir inte unikt längre.
+## Datum: 23-05-18
+Jag har jobbat på min likes funktion och kan nu med en inloggad användare ge en post oändligt med likes.
+## Datum: 23-05-19
+Jag har jobbat vidare med likes, det blev problem när varje like sparades som ett object i databasen men nu sparas endast användarens id som en sträng. En användare kan endast gilla en gång, klickar man igen så avgillar man posten. Likes fungerar som jag har tänkt men komponenten uppdateras inte så man måste ladda om sidan för att se förändringarna.

@@ -7,6 +7,7 @@ const Search = () => {
         <div>
             <Header />
             <h2>Search</h2>
+            <p className="feature">This feature is still in development</p>
             <Nav />
         </div>
     )

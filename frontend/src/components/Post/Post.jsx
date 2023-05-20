@@ -3,12 +3,17 @@ import { useEffect, useState } from 'react';
 import URL from '../../url';
 import './Post.css';
 
-const Post = ({ post }) => {
+const Post = ({ post, handleLike }) => {
     const { user } = useAuthContext();
     const [username, setUsername] = useState('');
     const [profileImg, setProfileImg] = useState('');
-    const isLiked = Boolean(post.likes[user.user._id]);
-    const likeCount = Object.keys(post.likes).length;
+    const isLiked = post.like.includes(user.user._id);
+    const [likeCount, setLikeCount] = useState(post.like.length);
+    // const [isLiked, setIsLiked] = useState(false);
+
+    useEffect(() => {
+        setLikeCount(post.like.length);
+      }, [post.like, post.user_id]);
 
     function timeSince(timestamp) {
         let time = Date.parse(timestamp);
@@ -56,23 +61,6 @@ const Post = ({ post }) => {
     const imageUrlPost = `${URL}/static/${post.filename}`;
     const imageUrlProfile = `${URL}/static/${profileImg}`;
 
-    const patchLike = async (id) => {
-        const response = await fetch(`${URL}/api/post/${id}/like`, {
-          method: "PATCH",
-          headers: {
-            'Authorization': `Bearer ${user.token}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ user_id: user.user._id }),
-        });
-
-        // const updatedPost = await response.json();
-
-        console.log('POST TO UPDATE:', response);
-
-        // dispatch({type: 'SET_POSTS', payload: updatedPost});
-    };
-
     return (
         <div className="post">
             <div className="postHeader">
@@ -93,7 +81,7 @@ const Post = ({ post }) => {
             </div>
             <div className="iconsContainer">
                 <div className="likesContainer">
-                    <i onClick={() => patchLike(post._id)} className="fa-regular fa-heart"></i>
+                    <i onClick={() => handleLike(post._id)} className={isLiked ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}></i>
                     <p className="likes">{likeCount}</p>
                 </div>
                 <div>

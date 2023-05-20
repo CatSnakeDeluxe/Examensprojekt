@@ -92,32 +92,40 @@ const updatePost =  async (req, res) => {
 
     res.status(200).json(postToUpdate);
 }
-
-// delete a post
-const likePost =  async (req, res) => {
-    // const id = '64636002d5ce1124e161a7e0';
-    // const userId = '645224d67a83027d838356c9';
-
+const likePost = async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.body;
-
-    // const post = await postModel.findById(id);
-    // const isLiked = post.likes.get(user_id);
-    // console.log(post.likes)
-
-    // if (isLiked) {
-    //     post.likes.delete(user_id);
-    // } else {
-    //     post.likes.set(user_id, true);
-    // }
-
-    const updatedPost = await postModel.findByIdAndUpdate(
-        id,
-        { likes: user_id },
-        // { new: true }
-    );
-
-    res.status(200).json(updatedPost);
-}
+  
+    try {
+      // Check if the post exists
+      const post = await postModel.findById(id);
+      if (!post) {
+        return res.status(404).json({ error: 'Post not found' });
+      }
+  
+      // Check if the user has already liked the post
+      const existingLikeIndex = post.like.findIndex(
+        (like) => like === user_id
+      );
+  
+      if (existingLikeIndex !== -1) {
+        // User has already liked the post, so unlike it
+        post.like.splice(existingLikeIndex, 1);
+        await post.save();
+  
+        return res.status(200).json({ message: 'Post unliked successfully' });
+      }
+  
+      // User has not liked the post, so like it
+      post.like.push(user_id);
+      await post.save();
+  
+      res.status(200).json({ message: 'Post liked successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  };
+  
 
 export default { getAllPosts, getAllUserPosts, getSinglePost, createPost, deletePost, updatePost, likePost }
