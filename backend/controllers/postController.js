@@ -157,17 +157,30 @@ const likePost = async (req, res) => {
 
 const getNotifications = async (req, res) => {
     const { userId } = req.query;
-  
-    try {
-      // Fetch notifications for the posts the logged-in user has posted
-      const notifications = await notificationModel.find({ postedBy: userId });
-  
-      res.status(200).json(notifications);
-    } catch (error) {
-      console.error('Error fetching notifications:', error);
-      res.status(500).json({ error: 'Server error' });
-    }
-  };
-  
 
-export default { getAllPosts, getAllUserPosts, getAllUserPostsSelectedUser, getSinglePost, createPost, deletePost, updatePost, likePost, getNotifications }
+    try {
+        // Fetch notifications for the posts the logged-in user has posted
+        const notifications = await notificationModel.find({ postedBy: userId });
+
+        res.status(200).json(notifications);
+    } catch (error) {
+        console.error('Error fetching notifications:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+  
+const search = async (req, res) => {
+const { query } = req.body;
+
+try {
+    // Use a regular expression to perform a case-insensitive search for posts with matching hashtags
+    const posts = await postModel.find({ hashtags: { $regex: query, $options: 'i' } });
+
+    res.json(posts);
+} catch (error) {
+    console.error('Error searching posts:', error);
+    res.status(500).json({ message: 'Internal server error' });
+}
+};
+
+export default { getAllPosts, getAllUserPosts, getAllUserPostsSelectedUser, getSinglePost, createPost, deletePost, updatePost, likePost, getNotifications, search }

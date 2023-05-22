@@ -62,7 +62,10 @@ router.put('/userposts/:id', upload.single('file'), postController.updatePost);
 // likes
 router.put('/:id/like', postController.likePost);
 
-//notifications
+// notifications
 router.get('/notifications/:id', postController.getNotifications);
+
+// search
+router.post('/search', postController.search);
 
 export default router;
