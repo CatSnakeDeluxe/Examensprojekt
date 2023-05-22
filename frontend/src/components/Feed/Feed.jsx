@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+// import { useNavigate } from "react-router-dom";
 import Post from '../Post/Post';
 import { usePostsContext } from '../../hooks/usePostsContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -8,8 +9,10 @@ import Nav from '../Nav/Nav';
 import './Feed.css';
 
 const Feed = () => {
+    // const navigate = useNavigate();
     const { posts, dispatch } = usePostsContext();
     const { user } = useAuthContext();
+
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -22,7 +25,6 @@ const Feed = () => {
             const json = await response.json();
 
             if(response.ok) {
-                // setPosts(json);
                 dispatch({type: 'SET_POSTS', payload: json});
             }
         }
@@ -33,12 +35,30 @@ const Feed = () => {
         
     }, [dispatch, user]);
 
+
+
+    const handleLike = async (id) => {
+        const response = await fetch(`${URL}/api/post/${id}/like`, {
+          method: "PUT",
+          headers: {
+            'Authorization': `Bearer ${user.token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: user.user._id }),
+        });
+
+        if (response.ok) {
+            const updatedPost = await response.json();
+            dispatch({ type: 'EDIT_POST', payload: updatedPost });
+        }
+    };
+
     return (
         <div className="feedContainer">
             <Header />
             <div className="posts">
                 {posts && posts.map((post) => (
-                    <Post key={post._id} post={post} />
+                    <Post key={post._id} post={post} handleLike={handleLike} />
                 ))}
             </div>
             <Nav />

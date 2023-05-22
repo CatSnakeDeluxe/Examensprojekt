@@ -7,6 +7,7 @@ const Chat = () => {
         <div>
             <Header />
             <h2>Chat</h2>
+            <p className="feature">This feature is still in development</p>
             <Nav />
         </div>
     )

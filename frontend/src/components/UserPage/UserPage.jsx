@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Post from '../Post/Post';
 import { useNavigate } from "react-router-dom";
 import { usePostsContext } from '../../hooks/usePostsContext';
@@ -14,6 +14,7 @@ const UserPage = () => {
     const { user } = useAuthContext();
     const imageUrl = `${URL}/static/${user.user.filename}`;
     const { posts, dispatch } = usePostsContext();
+    const [totalLikes, setTotalLikes] = useState(0);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -36,7 +37,15 @@ const UserPage = () => {
         
     }, [dispatch, user]);
 
-        const handleDelete = async(id) => {
+    useEffect(() => {
+        // Calculate total likes
+        if (posts) {
+            const likes = posts.reduce((total, post) => total + post.like.length, 0);
+            setTotalLikes(likes);
+        }
+    }, [posts]);
+
+    const handleDelete = async(id) => {
         const response = await fetch(`${URL}/api/post/userposts/${id}`, {
             method: 'DELETE',
             headers: {
@@ -55,6 +64,24 @@ const UserPage = () => {
         navigate(`/userPage/edit/${id}`);
     }
 
+    const handleLike = async (id) => {
+        const response = await fetch(`${URL}/api/post/${id}/like`, {
+          method: "PUT",
+          headers: {
+            'Authorization': `Bearer ${user.token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ user_id: user.user._id }),
+        });
+
+        if (response.ok) {
+            const updatedPost = await response.json();
+            dispatch({ type: 'EDIT_POST', payload: updatedPost });
+        }
+    };
+
+    const postCount = posts ? posts.length : 0;
+
     return (
         <div>
             <Header />
@@ -68,15 +95,15 @@ const UserPage = () => {
                     </div>
                     <div className="statsContainer">
                         <div className="stat">
-                            <p className="statNumber">30</p>
+                            <p className="statNumber">{postCount}</p>
                             <p className="statKind">Posts</p>
                         </div>
                         <div className="stat">
-                            <p className="statNumber">56</p>
+                            <p className="statNumber">0</p>
                             <p className="statKind">Comments</p>
                         </div>
                         <div className="stat">
-                            <p className="statNumber">87</p>
+                            <p className="statNumber">{totalLikes}</p>
                             <p className="statKind">Likes</p>
                         </div>
                     </div>
@@ -88,7 +115,7 @@ const UserPage = () => {
             <div className="postsUserPage">
                 {posts && posts.map((post) => (
                     <div className="userPosts" key={`div-${post._id}`}>
-                        <Post key={post._id} post={post} />
+                        <Post key={post._id} post={post} handleLike={handleLike}/>
                         <div className="btnContainer" key={`btnContainer-${post._id}`}>
                             <button onClick={() => handleDelete(post._id)} className="deleteBtn" key={`delete-${post._id}`}>Delete</button>
                             <button onClick={() => handleEdit(post._id)} className="editBtn" key={`edit-${post._id}`}>Edit</button>

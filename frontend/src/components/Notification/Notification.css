@@ -1,0 +1,45 @@
+.notificationContainer {
+    margin-bottom: 1rem;
+}
+
+/* .notificationsUserContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 340px;
+    margin: auto;
+} */
+
+.notificationsUserImgContainer {
+    width: 50px;
+    height: 50px;
+    margin-right: 0.6rem;
+}
+
+.notificationsUserImgContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2rem;
+}
+
+.notificationUser {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 1.2rem;
+}
+
+.notificationLeft {
+    display: flex;
+}
+
+.time {
+    font-size: 0.7rem;
+    align-self: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.likedYourPost {
+    font-size: 0.8rem;
+}

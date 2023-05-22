@@ -30,3 +30,7 @@ body {
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
 }
+
+.feature {
+  text-align: center;
+}

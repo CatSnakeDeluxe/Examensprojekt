@@ -1,4 +1,5 @@
 import postModel from '../models/postModel.js';
+import notificationModel from '../models/notificationModel.js';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
@@ -12,12 +13,23 @@ const getAllPosts = async (req, res) => {
     res.status(200).json(posts);
 }
 
-// get all posts for one user
+// get all posts for logged in user
 const getAllUserPosts = async (req, res) => {
+    console.log('USER', req.user._id);
     const posts = await postModel.find({ postedBy: req.user._id }).sort({createdAt: -1});
 
     // send posts to client
     res.status(200).json(posts);
+}
+
+// get all posts for one clicked user
+const getAllUserPostsSelectedUser = async (req, res) => {
+    // const userId = req.params.id.toString();
+    console.log('req.body', req.body);
+    // const posts = await postModel.find({ postedBy: userId }).sort({createdAt: -1});
+
+    // // send posts to client
+    // res.status(200).json(posts);
 }
 
 // get a single post
@@ -93,31 +105,69 @@ const updatePost =  async (req, res) => {
     res.status(200).json(postToUpdate);
 }
 
-// delete a post
-const likePost =  async (req, res) => {
-    // const id = '64636002d5ce1124e161a7e0';
-    // const userId = '645224d67a83027d838356c9';
+// const respond = (socket) => {
+//     return (data) => {
+//       socket.emit('notification', data);
+//     };
+// };
 
+const likePost = async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.body;
+  
+    try {
+        // Check if the post exists
+        const post = await postModel.findById(id);
+        if (!post) {
+          return res.status(404).json({ error: 'Post not found' });
+        }
+    
+        // Check if the user has already liked the post
+        const existingLikeIndex = post.like.findIndex((like) => like === user_id);
+    
+        if (existingLikeIndex !== -1) {
+          // User has already liked the post, so unlike it
+          post.like.splice(existingLikeIndex, 1);
+          await post.save();
+          return res.status(200).json({ message: 'Post unliked successfully' });
+        }
 
-    // const post = await postModel.findById(id);
-    // const isLiked = post.likes.get(user_id);
-    // console.log(post.likes)
+        if (existingLikeIndex < 1) {
+        // User has not liked the post, so like it
+        post.like.push(user_id);
+        await post.save();
+    
+        const notification = new notificationModel({
+          postId: id, // ID of the post
+          likedBy: user_id, // ID or name of the user who liked the post
+        });
+    
+        await notification.save();
 
-    // if (isLiked) {
-    //     post.likes.delete(user_id);
-    // } else {
-    //     post.likes.set(user_id, true);
-    // }
+        // req.app.get('io').emit('notification', { message: 'A new response from the controller' });
 
-    const updatedPost = await postModel.findByIdAndUpdate(
-        id,
-        { likes: user_id },
-        // { new: true }
-    );
+        res.status(200).json({ message: 'Post liked successfully' });
+        }
 
-    res.status(200).json(updatedPost);
-}
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+      }
+};
 
-export default { getAllPosts, getAllUserPosts, getSinglePost, createPost, deletePost, updatePost, likePost }
+const getNotifications = async (req, res) => {
+    const { userId } = req.query;
+  
+    try {
+      // Fetch notifications for the posts the logged-in user has posted
+      const notifications = await notificationModel.find({ postedBy: userId });
+  
+      res.status(200).json(notifications);
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+      res.status(500).json({ error: 'Server error' });
+    }
+  };
+  
+
+export default { getAllPosts, getAllUserPosts, getAllUserPostsSelectedUser, getSinglePost, createPost, deletePost, updatePost, likePost, getNotifications }
