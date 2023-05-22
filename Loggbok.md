@@ -54,4 +54,8 @@ Jag har jobbat på min likes funktion och kan nu med en inloggad användare ge e
 ## Datum: 23-05-19
 Jag har jobbat vidare med likes, det blev problem när varje like sparades som ett object i databasen men nu sparas endast användarens id som en sträng. En användare kan endast gilla en gång, klickar man igen så avgillar man posten. Likes fungerar som jag har tänkt men komponenten uppdateras inte så man måste ladda om sidan för att se förändringarna.
 ## Datum: 23-05-20
-Jag har tagit en liten paus från likes och har fått till så post/likes visas dynamiskt på userPage.
+Jag har tagit en liten paus från likes och har istället fått till så post/likes visas dynamiskt på userPage. Jag har kämpat med att få till en SelectedUser komponent men det blir att den komponenten visar både den valda användaren och den inloggade och jag vet inte varför. Jag har fått ordning på likes genom att mellanlanda i en funktion i Post.jsx som uppdaterar state.
+## Datum: 23-05-21
+Jag försöker få till notifications har fått alla error man kan få känns det som. Jag använder mig av socket io och har haft mycket problem med cors, 404 och liknande. 
+## Datum: 23-05-22
+Efter att ha försökt i 6 timmar idag att få till socket io så har jag gjort så notifications har ett eget schema istället och när man går in på notifications så görs en gammal hederlig fetch. Jag ville gärna ha en socketlösning men det finns för mycket annat att lösa innan redovisningen så det prioriteras bort för tillfället.

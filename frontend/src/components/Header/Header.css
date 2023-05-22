@@ -22,3 +22,17 @@
     color: var(--white);
     font-size: 1.2rem;
 }
+
+.counter {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: var(--orange);
+    text-align: center;
+    border-radius: 1rem;
+    color: var(--black);
+    font-weight: 500;
+    position: relative;
+    bottom: 10px;
+    left: -5px;
+}

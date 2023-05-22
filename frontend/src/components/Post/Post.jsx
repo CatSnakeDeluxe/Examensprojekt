@@ -81,10 +81,10 @@ const Post = ({ post, handleLike }) => {
                         <div className="userImgContainer">
                             <img src={imageUrlProfile} alt="userImage" />
                         </div>
-                        {/* <p className="postUsername">{username}</p> */}
-                        <Link to={`/selecteduser/${post.postedBy}`} className="postUsername">
+                        <p className="postUsername">{username}</p>
+                        {/* <Link to={`/selecteduser/${post.postedBy}`} className="postUsername">
                         {username}
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
                 <div>
