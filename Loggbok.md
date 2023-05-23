@@ -59,3 +59,5 @@ Jag har tagit en liten paus från likes och har istället fått till så post/li
 Jag försöker få till notifications har fått alla error man kan få känns det som. Jag använder mig av socket io och har haft mycket problem med cors, 404 och liknande. 
 ## Datum: 23-05-22
 Efter att ha försökt i 6 timmar idag att få till socket io så har jag gjort så notifications har ett eget schema istället och när man går in på notifications så görs en gammal hederlig fetch. Jag ville gärna ha en socketlösning men det finns för mycket annat att lösa innan redovisningen så det prioriteras bort för tillfället.
+## Datum: 23-05-23
+Jag har fått till en fungerande search funktion som visar posts med matchande hashtag som sökningen. Jag har fått till så man får en preview av bilden vid skapande och editerande av post. Det krånglade mycket vid edit då det inte är en blob utan endast ett filnamn som finns i formuläret när man först klickar på edit.

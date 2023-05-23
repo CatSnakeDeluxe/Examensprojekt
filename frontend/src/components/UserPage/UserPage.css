@@ -2,6 +2,13 @@
     display: flex;
     justify-content: space-around;
     padding: 0.2rem 1rem;
+    max-width: 340px;
+    margin: auto;
+}
+
+.userPageHeaderDescription {
+    max-width: 340px;
+    margin: auto;
 }
 
 .userPageImgContainer {
@@ -50,6 +57,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 1rem;
 }
 
 .userPosts:last-child {
@@ -83,4 +91,16 @@
     border: 2px solid rgb(255, 255, 255);
     color: rgb(255, 255, 255);
     margin-left: 1rem;
+}
+
+.usernameAndEdit {
+    display: flex;
+    justify-content: center;
+}
+
+.fa-pen-to-square {
+    align-self: center;
+    margin-left: 1rem;
+    margin-top: -4px;
+    font-size: 1.2rem;
 }

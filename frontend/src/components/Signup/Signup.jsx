@@ -26,6 +26,31 @@ const Signup = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
 
+        if (!email) {
+            setError("Email required");
+            return
+        }
+
+        if (!username) {
+            setError("Username required");
+            return
+        }
+
+        if (!password) {
+            setError("Password required");
+            return
+        }
+
+        if (!description) {
+            setError("Description required");
+            return
+        }
+
+        if (!file) {
+            setError("Profile Picture required ( .jpg )");
+            return
+        }
+
         // await signup(email, username, password, fileName);
         await signup(formData);
 

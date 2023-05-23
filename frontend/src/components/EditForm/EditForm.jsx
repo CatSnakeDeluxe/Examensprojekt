@@ -15,12 +15,28 @@ const EditForm = () => {
     const [description, setDescription] = useState('');
     const [hashtags, setHashtags] = useState('');
     const [file, setFile] = useState(null);
+    const [preview, setPreview] = useState(null);
     const [error, setError] = useState(null);
 
     const formData = new FormData();
     if (description) formData.append('description', description);
     if (hashtags) formData.append('hashtags', hashtags);
     if (file) formData.append('file', file);
+
+    useEffect(() => {
+        if (file) {
+          const reader = new FileReader();
+      
+          reader.onloadend = () => {
+            setPreview(reader.result);
+          };
+      
+          if (file instanceof Blob) {
+            reader.readAsDataURL(file);
+          }
+        }
+      }, [file]);
+      
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,9 +48,6 @@ const EditForm = () => {
         if (!description || !hashtags || !file) {
             setError('All fields required');
         }
-
-        // const editedData = {description: description, hashtags: hashtags, filename:file}
-        // console.log('editedData', editedData);
 
         const response = await fetch(`${URL}/api/post/userposts/${id}`, {
             method: 'PUT',
@@ -69,9 +82,13 @@ const EditForm = () => {
 
             const json = await response.json();
 
-            setFile(json);
+            setFile(json.filename);
             setDescription(json.description);
             setHashtags(json.hashtags);
+
+            console.log(json)
+
+            setPreview(`${URL}/static/${json.filename}`);
         }
     
         if (user) {
@@ -80,19 +97,26 @@ const EditForm = () => {
         
     }, [dispatch, user]);
 
-    // console.log(file.filename);
-
     return (
         <div>
             <Header />
             <form className="editPostForm" onSubmit={handleSubmit}>
                 <h2>Edit Post</h2>
                 <label className="custom-file-upload">
-                    <input type="file" name="file" id="file" onChange={(e) => setFile(e.target.files[0])} />
-                    Upload Picture
-                </label>
+          <input type="file" name="file" id="file" onChange={(e) => {
+            if (e.target.files && e.target.files.length > 0) {
+              setFile(e.target.files[0]);
+            }
+          }} />
+          Upload Picture
+        </label>
                 {/* <p className="uploadFilename">{file.name || file.filename}</p> */}
                 {/* <p className="uploadFilename">{file.filename}</p> */}
+                {preview && (
+                <div className="previewImage">
+                    <img src={preview} alt="Preview" />
+                </div>
+                )}  
                 <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}
                     placeholder="Write a description"/>
                 <input type="text" value={hashtags} onChange={(e) => setHashtags(e.target.value)} 

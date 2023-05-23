@@ -35,8 +35,6 @@ const Feed = () => {
         
     }, [dispatch, user]);
 
-
-
     const handleLike = async (id) => {
         const response = await fetch(`${URL}/api/post/${id}/like`, {
           method: "PUT",
