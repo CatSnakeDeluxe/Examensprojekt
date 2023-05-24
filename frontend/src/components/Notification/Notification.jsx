@@ -88,34 +88,60 @@ const Notification = () => {
     }
   }
 
-  const imageUrlProfile = `${URL}/static/${profileImg}`
+  // const imageUrlProfile = `${URL}/static/${profileImg}`
+
+  const handleClearNotifications = async () => {
+    try {
+      const response = await fetch(`${URL}/api/post/clearnotifications/${user.user._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
+
+      if (response.ok) {
+        setNotifications([]);
+      }
+    } catch (error) {
+      console.error('Error clearing notifications:', error);
+    }
+  };
 
   return (
     <div>
       <Header />
       <h2>Notifications</h2>
+      <div>
       {notifications && notifications.length > 0 ? (
-        notifications.map((notification, index) => (
-          <div className="notification" key={index}>
-            {usersData[notification.likedBy] && (
-              <div className="notificationUser">
-                <div className="notificationLeft">
-                  <div className="notificationsUserImgContainer">
-                    <img src={`${URL}/static/${usersData[notification.likedBy].filename}`} alt="userImage" />
-                  </div>
-                  <div className="notificationUsername">
-                    <p>{usersData[notification.likedBy].username}</p>
-                    <p className="likedYourPost">liked your post</p>
-                  </div>
-                </div>
-                <p className="time">{timeSince(notification.createdAt)}</p>
-              </div>
-            )}
+        <div>
+          <div className="clearBtnContainer">
+            <i onClick={handleClearNotifications} className="fa-solid fa-broom"></i>
+            {/* <button className="clearBtn" onClick={handleClearNotifications}>Clear</button> */}
           </div>
-        ))
+          {notifications.map((notification, index) => (
+            <div className="notification" key={index}>
+              {usersData[notification.likedBy] && (
+                <div className="notificationUser">
+                  <div className="notificationLeft">
+                    <div className="notificationsUserImgContainer">
+                      <img src={`${URL}/static/${usersData[notification.likedBy].filename}`} alt="userImage" />
+                    </div>
+                    <div className="notificationUsername">
+                      <p>{usersData[notification.likedBy].username}</p>
+                      <p className="likedYourPost">liked your post</p>
+                    </div>
+                  </div>
+                  <p className="time">{timeSince(notification.createdAt)}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       ) : (
         <p className="noNotifications">No notifications</p>
       )}
+      <Nav />
+    </div>
       <Nav />
     </div>
   );

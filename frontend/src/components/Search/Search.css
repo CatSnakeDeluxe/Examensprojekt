@@ -1,0 +1,14 @@
+.searchbar {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+}
+
+.fa-magnifying-glass {
+    align-self: center;
+}
+
+.searchResult {
+    text-align: center;
+    margin: 1rem;
+}

@@ -1,0 +1,11 @@
+.feedPosts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: auto;
+}
+
+.feedUserPosts {
+    margin-bottom: -3rem;
+}

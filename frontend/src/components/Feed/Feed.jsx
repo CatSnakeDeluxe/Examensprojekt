@@ -35,8 +35,6 @@ const Feed = () => {
         
     }, [dispatch, user]);
 
-
-
     const handleLike = async (id) => {
         const response = await fetch(`${URL}/api/post/${id}/like`, {
           method: "PUT",
@@ -56,9 +54,11 @@ const Feed = () => {
     return (
         <div className="feedContainer">
             <Header />
-            <div className="posts">
+            <div className="feedPosts">
                 {posts && posts.map((post) => (
-                    <Post key={post._id} post={post} handleLike={handleLike} />
+                    <div className="feedUserPosts" key={`div-${post._id}`}>
+                        <Post key={post._id} post={post} handleLike={handleLike}/>
+                    </div>
                 ))}
             </div>
             <Nav />

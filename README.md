@@ -35,22 +35,22 @@ Jag tänkte skapa ett socialt nätverk likt instagram med nodejs/express som bac
 * Färger
 * Responsiv
 ### Kod
-* Registrera användare
-* Inloggning/Session
-* Hashning av lösenord
-* Inloggad användare ska kunna se sina egna poster på en profilsida
-* Inloggad användare ska kunna få notiser om någon gillar en post
-* Inloggad användare ska kunna lägga till/editera/ta bort poster
-* Inloggad användare ska kunna gilla poster
-* Applikationen ska vara hostad
+* [X] Registrera användare
+* [X] Inloggning/Session
+* [X] Hashning av lösenord
+* [X] Inloggad användare ska kunna se sina egna poster på en profilsida
+* [X] Inloggad användare ska kunna få notiser om någon gillar en post
+* [X] Inloggad användare ska kunna lägga till/editera/ta bort poster
+* [X] Inloggad användare ska kunna gilla poster
+* [X] Applikationen ska vara hostad
 
 ### Kod extra
-* Inloggad användare ska kunna kommentera på poster
-* Inloggad användare ska kunna gilla kommentarer på poster
-* Editera kontouppgifter/radera konto samt alla poster användaren skapat
-* Hashtags för att användare ska kunna söka efter poster
-* Funktionalitet för att följa användare och se deras poster i flödet
-* Funktionalitet för att använda filter på sina bilder
-* Funktionalitet för att återställa glömt lösenord
-* Chatt funktionalitet
+* [] Editera kontouppgifter/radera konto samt alla poster användaren skapat
+* [X] Hashtags för att användare ska kunna söka efter poster
+* [] Inloggad användare ska kunna kommentera på poster
+* [] Inloggad användare ska kunna gilla kommentarer på poster
+* [] Funktionalitet för att följa användare och se deras poster i flödet
+* [] Funktionalitet för att använda filter på sina bilder
+* [] Funktionalitet för att återställa glömt lösenord
+* [] Chatt funktionalitet
 

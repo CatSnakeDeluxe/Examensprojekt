@@ -1,9 +1,16 @@
 .createPostForm {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 360px;
     margin: auto;
 }
+
+/* .createContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+} */
 
 .createPostForm input[type="email"], input[type="text"], input[type="password"] {
     text-align: center;
@@ -41,4 +48,21 @@
     border-style: solid;
     border-image: linear-gradient(to right, var(--yellow), var(--orange)) 1;
     align-self: center;
+}
+
+.error {
+    text-align: center;
+    margin: 1rem;
+}
+
+.previewImage {
+    margin-top: 0.8rem;
+    width: 360px;
+    height: 300px;
+}
+
+.previewImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

@@ -2,6 +2,7 @@ import postModel from '../models/postModel.js';
 import notificationModel from '../models/notificationModel.js';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import * as path from 'path';
 
 dotenv.config();
 
@@ -24,12 +25,11 @@ const getAllUserPosts = async (req, res) => {
 
 // get all posts for one clicked user
 const getAllUserPostsSelectedUser = async (req, res) => {
-    // const userId = req.params.id.toString();
-    console.log('req.body', req.body);
-    // const posts = await postModel.find({ postedBy: userId }).sort({createdAt: -1});
+    const userId = req.params.id.toString();
+    const posts = await postModel.find({ postedBy: userId }).sort({ createdAt: -1 });
 
-    // // send posts to client
-    // res.status(200).json(posts);
+    // send posts to client
+    res.status(200).json(posts);
 }
 
 // get a single post
@@ -105,12 +105,6 @@ const updatePost =  async (req, res) => {
     res.status(200).json(postToUpdate);
 }
 
-// const respond = (socket) => {
-//     return (data) => {
-//       socket.emit('notification', data);
-//     };
-// };
-
 const likePost = async (req, res) => {
     const { id } = req.params;
     const { user_id } = req.body;
@@ -144,8 +138,6 @@ const likePost = async (req, res) => {
     
         await notification.save();
 
-        // req.app.get('io').emit('notification', { message: 'A new response from the controller' });
-
         res.status(200).json({ message: 'Post liked successfully' });
         }
 
@@ -156,11 +148,20 @@ const likePost = async (req, res) => {
 };
 
 const getNotifications = async (req, res) => {
-    const { userId } = req.query;
+    const { id } = req.params;
+    console.log( 'userId',id);
   
     try {
-      // Fetch notifications for the posts the logged-in user has posted
-      const notifications = await notificationModel.find({ postedBy: userId });
+      // Fetch the posts owned by the logged-in user
+      const userPosts = await postModel.find({ postedBy: id });
+  
+      // Get the IDs of the logged-in user's posts
+      const postIds = userPosts.map((post) => post._id);
+  
+      // Fetch notifications for the logged-in user's posts
+      const notifications = await notificationModel
+        .find({ postId: { $in: postIds } })
+        .sort({ createdAt: -1 });
   
       res.status(200).json(notifications);
     } catch (error) {
@@ -168,6 +169,52 @@ const getNotifications = async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   };
-  
 
-export default { getAllPosts, getAllUserPosts, getAllUserPostsSelectedUser, getSinglePost, createPost, deletePost, updatePost, likePost, getNotifications }
+// delete notifications
+const clearNotifications = async (req, res) => {
+    try {
+      const userId = req.user.id;
+  
+      // Find the posts owned by the user
+      const userPosts = await postModel.find({ postedBy: userId });
+  
+      // Get the IDs of the user's posts
+      const postIds = userPosts.map((post) => post._id);
+  
+      // Delete the notifications associated with the user's posts
+      await notificationModel.deleteMany({ postId: { $in: postIds } });
+  
+      res.sendStatus(200);
+    } catch (error) {
+      console.error('Error clearing notifications:', error);
+      res.sendStatus(500);
+    }
+  };
+  
+const search = async (req, res) => {
+    const { query } = req.body;
+
+    try {
+        // Use a regular expression to perform a case-insensitive search for posts with matching hashtags
+        const posts = await postModel.find({ hashtags: { $regex: query, $options: 'i' } });
+
+        res.json(posts);
+    } catch (error) {
+        console.error('Error searching posts:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+export default { 
+    getAllPosts, 
+    getAllUserPosts, 
+    getAllUserPostsSelectedUser, 
+    getSinglePost, 
+    createPost, 
+    deletePost, 
+    updatePost, 
+    likePost, 
+    getNotifications, 
+    search, 
+    clearNotifications,
+}

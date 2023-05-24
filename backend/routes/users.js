@@ -8,26 +8,20 @@ const router = express.Router();
 
 const storage =
 sharp ({
-  destination:(req, file, callback) => callback(null, "./public/uploads/"),
+  destination:(req, file, callback) => {
+    callback(null, "./public/uploads/");
+  },
   imageOptions:{
   fileFormat: "jpg",
   quality: 80,
   resize: { width: 500, height: 500 },
-  },
-  filename: (req, file, cb) => {
-    cb(null, uuidv4() + file.originalname);
   }
 });
 
-const upload  =  multer({ storage });
+const upload  =  multer({ storage: storage , limits: { filesize: 300000 } });
 
-// router.get('/', (req, res) => {
-//     res.json({mssg: 'GET all Users'});
-// });
 
 router.get('/:id', userController.getSingleUser);
-
-
 
 // register
 router.post('/login', userController.loginUser);

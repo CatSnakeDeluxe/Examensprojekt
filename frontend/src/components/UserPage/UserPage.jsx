@@ -64,6 +64,10 @@ const UserPage = () => {
         navigate(`/userPage/edit/${id}`);
     }
 
+    // const handleEditUser = async(id) => {
+    //     navigate(`/userPage/useredit/${id}`);
+    // }
+
     const handleLike = async (id) => {
         const response = await fetch(`${URL}/api/post/${id}/like`, {
           method: "PUT",
@@ -90,8 +94,9 @@ const UserPage = () => {
                     <img src={imageUrl} alt="" />
                 </div>
                 <div>
-                    <div>
+                    <div className="usernameAndEdit">
                         <h3 className="username">{user.user.username}</h3>
+                        {/* <i onClick={() => handleEditUser(user.user._id)} className="fa-solid fa-pen-to-square"></i> */}
                     </div>
                     <div className="statsContainer">
                         <div className="stat">
@@ -106,10 +111,11 @@ const UserPage = () => {
                             <p className="statNumber">{totalLikes}</p>
                             <p className="statKind">Likes</p>
                         </div>
+                        
                     </div>
                 </div>
             </div>
-            <div>
+            <div className="userPageHeaderDescription">
                 <p className="userPageDescription">{user.user.description}</p>
             </div>
             <div className="postsUserPage">
