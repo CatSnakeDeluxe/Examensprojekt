@@ -2,13 +2,6 @@
     margin-bottom: 1rem;
 }
 
-/* .notificationsUserContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 340px;
-    margin: auto;
-} */
-
 .notificationsUserImgContainer {
     width: 50px;
     height: 50px;
@@ -42,4 +35,23 @@
 
 .likedYourPost {
     font-size: 0.8rem;
+}
+
+.noNotifications {
+    text-align: center;
+}
+
+.clearBtn {
+    background: transparent;
+    padding: 0.2rem;
+    width: 120px;
+    border-radius: 5px;
+    border: 2px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+.clearBtnContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.4rem;
 }

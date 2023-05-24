@@ -61,3 +61,5 @@ Jag försöker få till notifications har fått alla error man kan få känns de
 Efter att ha försökt i 6 timmar idag att få till socket io så har jag gjort så notifications har ett eget schema istället och när man går in på notifications så görs en gammal hederlig fetch. Jag ville gärna ha en socketlösning men det finns för mycket annat att lösa innan redovisningen så det prioriteras bort för tillfället.
 ## Datum: 23-05-23
 Jag har fått till en fungerande search funktion som visar posts med matchande hashtag som sökningen. Jag har fått till så man får en preview av bilden vid skapande och editerande av post. Det krånglade mycket vid edit då det inte är en blob utan endast ett filnamn som finns i formuläret när man först klickar på edit. Jag har upptäckt att om man inte byter bild när man editerar en post så kraschar servern på grund av att filnamnet är undefined.
+## Datum: 23-05-24
+Jag har fått till så filnamnen blir unika med uuid genom att göra det i frontenden innan det skickas till min backend genom formdata.

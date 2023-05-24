@@ -3,17 +3,11 @@ import postController from '../controllers/postController.js';
 import requireAuth from '../middleware/requireAuth.js';
 import multer from 'multer';
 import sharp from 'sharp-multer';
-import { v4 as uuidv4 } from 'uuid';
 
 const storage =
 sharp ({
   destination:(req, file, callback) => {
-    console.log('INSIDE DESTINATION');
     callback(null, "./public/uploads/");
-  },
-  filename: (req, file, callback) => {
-    console.log('INSIDE FILENAME');
-    callback(null, uuidv4() + file.originalname);
   },
   imageOptions:{
   fileFormat: "jpg",
@@ -23,17 +17,6 @@ sharp ({
 });
 
 const upload  =  multer({ storage: storage , limits: { filesize: 300000 } });
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//       cb(null, './public/uploads/');
-//   },
-//   filename: (req, file, cb) => {
-//       cb(null, uuidv4() + file.originalname);
-//   }
-// });
-
-// let upload = multer({ storage: storage, limits: { filesize: 300000 }});
 
 const router = express.Router();
 router.use(requireAuth);
@@ -67,5 +50,8 @@ router.get('/notifications/:id', postController.getNotifications);
 
 // search
 router.post('/search', postController.search);
+
+router.delete('/clearnotifications/:id', postController.clearNotifications);
+
 
 export default router;

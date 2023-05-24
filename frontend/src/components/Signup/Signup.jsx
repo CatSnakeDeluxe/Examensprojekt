@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSignup } from "../../hooks/useSignup";
+import { v4 as uuidv4 } from 'uuid';
 import './Signup.css';
 import { useState } from "react";
 
@@ -18,8 +19,11 @@ const Signup = () => {
     if (username) formData.append('username', username);
     if (password) formData.append('password', password);
     if (description) formData.append('description', description);
-    if (file) formData.append('file', file);
-    // console.log('FILE:', file.name);
+    if (file) {
+        const newFilename = uuidv4() + file.name;
+        const modifiedFile = new File([file], newFilename, { type: file.type });
+        formData.append('file', modifiedFile);
+    }
 
     const { signup } = useSignup();
 

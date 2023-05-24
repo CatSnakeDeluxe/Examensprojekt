@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePostsContext } from "../../hooks/usePostsContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 import URL from '../../url';
 import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
@@ -21,8 +22,12 @@ const PostForm = () => {
     const formData = new FormData();
     if (description) formData.append('description', description);
     if (hashtags) formData.append('hashtags', hashtags);
-    if (file) formData.append('file', file);
-
+    if (file) {
+        const newFilename = uuidv4() + file.name;
+        const modifiedFile = new File([file], newFilename, { type: file.type });
+        formData.append('file', modifiedFile);
+    }
+    
     useEffect(() => {
         if (file) {
           const reader = new FileReader();

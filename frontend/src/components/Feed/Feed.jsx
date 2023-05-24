@@ -54,7 +54,7 @@ const Feed = () => {
     return (
         <div className="feedContainer">
             <Header />
-            <div className="posts">
+            <div className="feedPosts">
                 {posts && posts.map((post) => (
                     <Post key={post._id} post={post} handleLike={handleLike} />
                 ))}

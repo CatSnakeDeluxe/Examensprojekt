@@ -13,7 +13,7 @@ const postSchema = new Schema({
     },
     filename: {
         type: String,
-        required: true
+        // required: true
     },
     postedBy: {
         type: mongoose.Schema.ObjectId, 
