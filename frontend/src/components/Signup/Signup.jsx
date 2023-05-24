@@ -69,7 +69,7 @@ const Signup = () => {
                 <input type="email" name="email" id="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
                 <input type="text" name="username" id="username" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)}/>
                 <input type="password" name="password" id="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
-                <textarea rows="5" name="description" id="description" placeholder="Write something about yourself..." value={description} onChange={e => setDescription(e.target.value)}/>
+                <textarea rows="2" name="description" id="description" placeholder="Write something about yourself..." value={description} onChange={e => setDescription(e.target.value)}/>
                 <label className="custom-file-upload">
                     {/* <input type="file" name="file" value={fileName} onChange={(e) => setFileName(e.target.files[0])}/> */}
                     <input type="file" name="file" id="file" onChange={(e) => setFile(e.target.files[0])}/>

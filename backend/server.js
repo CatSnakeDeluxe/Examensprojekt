@@ -5,38 +5,14 @@ import UserRoutes from './routes/users.js';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import postController from './controllers/postController.js';
-import http from 'http';
-import { Server } from 'socket.io';
 
 dotenv.config();
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-// const server = http.createServer(app);
-
-// const io = new Server(server, {
-//   cors: {
-//     origin: `http://localhost:3000`,
-//     methods: ['GET', 'POST', 'PUT']
-//   }
-// });
-
-// io.on("connection", (socket) => {
-//   console.log("SERVER socket connected");
-
-//   socket.on('notification', (data) => {
-//     postController.likePost(socket)(data, null); // Call the likePost function with the socket and null for req and res
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("DISCONNECTED");
-//   });
-// });
-
-// io.listen(4000);
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use('/static', express.static('public/uploads'));
 
 // middleware

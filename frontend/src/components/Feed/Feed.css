@@ -5,3 +5,7 @@
     gap: 1rem;
     margin: auto;
 }
+
+.feedUserPosts {
+    margin-bottom: -3rem;
+}

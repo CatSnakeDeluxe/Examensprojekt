@@ -2,6 +2,7 @@ import postModel from '../models/postModel.js';
 import notificationModel from '../models/notificationModel.js';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import * as path from 'path';
 
 dotenv.config();
 
@@ -168,9 +169,6 @@ const getNotifications = async (req, res) => {
       res.status(500).json({ error: 'Server error' });
     }
   };
-  
-  
-  
 
 // delete notifications
 const clearNotifications = async (req, res) => {
@@ -192,8 +190,6 @@ const clearNotifications = async (req, res) => {
       res.sendStatus(500);
     }
   };
-  
-  
   
 const search = async (req, res) => {
     const { query } = req.body;
@@ -220,5 +216,5 @@ export default {
     likePost, 
     getNotifications, 
     search, 
-    clearNotifications 
+    clearNotifications,
 }

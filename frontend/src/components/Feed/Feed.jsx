@@ -56,7 +56,9 @@ const Feed = () => {
             <Header />
             <div className="feedPosts">
                 {posts && posts.map((post) => (
-                    <Post key={post._id} post={post} handleLike={handleLike} />
+                    <div className="feedUserPosts" key={`div-${post._id}`}>
+                        <Post key={post._id} post={post} handleLike={handleLike}/>
+                    </div>
                 ))}
             </div>
             <Nav />
