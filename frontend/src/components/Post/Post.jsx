@@ -1,6 +1,5 @@
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import URL from '../../url';
 import './Post.css';
 
@@ -8,15 +7,8 @@ const Post = ({ post, handleLike }) => {
     const { user } = useAuthContext();
     const [username, setUsername] = useState('');
     const [profileImg, setProfileImg] = useState('');
-    // const isLiked = post.like.includes(user.user._id);
     const [isLiked, setIsLiked] = useState(post.like.includes(user.user._id));
     const [likeCount, setLikeCount] = useState(post.like.length);
-    // const [isLiked, setIsLiked] = useState(false);
-
-    useEffect(() => {
-        setLikeCount(post.like.length);
-        setIsLiked(post.like.includes(user.user._id));
-    }, [post.like, user.user._id]);
 
     function timeSince(timestamp) {
         let time = Date.parse(timestamp);
@@ -62,16 +54,19 @@ const Post = ({ post, handleLike }) => {
     }, [user]);
 
     const handleLikeClick = async (postId) => {
-        // Call the handleLike function passed from the parent component
         await handleLike(postId);
 
-        // Update the like count and liked status in the component state
         setIsLiked(!isLiked);
         setLikeCount(isLiked ? likeCount - 1 : likeCount + 1);
     };
 
     const imageUrlPost = `${URL}/static/${post.filename}`;
     const imageUrlProfile = `${URL}/static/${profileImg}`;
+    
+    useEffect(() => {
+        setLikeCount(post.like.length);
+        setIsLiked(post.like.includes(user.user._id));
+    }, [post.like, user.user._id]);
 
     return (
         <div className="post">
@@ -82,9 +77,6 @@ const Post = ({ post, handleLike }) => {
                             <img src={imageUrlProfile} alt="userImage" />
                         </div>
                         <p className="postUsername">{username}</p>
-                        {/* <Link to={`/selecteduser/${post.postedBy}`} className="postUsername">
-                        {username}
-                        </Link> */}
                     </div>
                 </div>
                 <div>
