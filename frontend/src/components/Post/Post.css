@@ -71,6 +71,7 @@
 .fa-heart, .fa-bookmark, .fa-message {
     font-size: 1.2rem;
     margin: 0.6rem 0.4rem;
+    cursor: pointer;
 }
 
 .hashtags, .likes {
