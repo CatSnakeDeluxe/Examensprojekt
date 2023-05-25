@@ -62,9 +62,13 @@ const Search = () => {
       {searchResults.length > 0 ? (
         <div>
           <p className="searchResult">Posts Found :</p>
-          {searchResults.map((post) => (
-            <Post key={post._id} post={post}handleLike={handleLike} />
-          ))}
+          <div className="searchPostsContainer">
+            {searchResults.map((post) => (
+              <div className="searchPosts">
+                <Post key={post._id} post={post}handleLike={handleLike} />
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <p className="searchResult">No Posts Found</p>

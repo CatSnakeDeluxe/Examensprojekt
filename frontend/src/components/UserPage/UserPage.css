@@ -79,6 +79,7 @@
     padding: 0.2rem;
     width: 120px;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .deleteBtn {

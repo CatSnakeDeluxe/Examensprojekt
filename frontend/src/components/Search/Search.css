@@ -6,9 +6,22 @@
 
 .fa-magnifying-glass {
     align-self: center;
+    cursor: pointer;
 }
 
 .searchResult {
     text-align: center;
     margin: 1rem;
+}
+
+.searchPostsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: auto;
+}
+
+.searchPosts {
+    margin-bottom: -3rem;
 }

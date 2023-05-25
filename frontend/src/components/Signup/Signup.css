@@ -67,6 +67,7 @@ h2 {
     border-style: solid;
     border-image: linear-gradient(to right, var(--yellow), var(--orange)) 1;
     align-self: center;
+    cursor: pointer;
 }
 
 input[type="file"] {
