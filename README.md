@@ -1,4 +1,5 @@
 # Examensprojekt
+![](Postr.gif)
 ## Starta upp projektet
 ### Steg 1
 Klona ner repot
